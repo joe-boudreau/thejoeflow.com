@@ -1,0 +1,84 @@
+.blurred-img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	opacity: 0;
+}
+
+.main-header {
+	margin-bottom: 200px;
+	padding: 0px;
+}
+
+h1, h2, li.nav-h1 a{
+	font-family: 'Fjalla One', sans-serif;
+}
+
+p, h3, h4, a, li, li.nav-h2 a {
+	font-family: 'Armata', sans-serif;
+}
+
+li.open:hover {
+	background-color: #FFF;
+}
+
+.nav-h1:hover, ul.dropdown-menu li.nav-h2 a:hover, .nav-h2:hover {
+	background-color: rgba(24, 232, 163, 0.5);
+	background-image: none;
+}
+
+.even {
+	background-color: #DBDBDB;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.odd {
+	background-color: #ffffff;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+img.icons {
+	max-width: 75px;
+}
+
+.headerBackground {
+	background-position: center;
+}
+
+.headerLogo {
+	width: 50%;
+	max-width: 700px;
+	padding:80px 0px;
+}
+
+.xtraSpaceHeader {
+	margin-top: 50px;
+}
+
+.icon-cn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+}
+
+.jumbotron {
+    background-size: cover;
+    transition:height 0.5s;
+    margin-bottom: 0px;
+}
+
+#jumbotron-card{
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+.sidebar {
+}
+
+.container {
+margin-left: 0px;
+}
