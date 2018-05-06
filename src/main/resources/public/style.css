@@ -24,6 +24,15 @@ li.open:hover {
 	background-color: #FFF;
 }
 
+h1 a {
+    color: black;
+}
+
+a:hover{
+    color: rgb(24, 232, 163);
+    text-decoration: none;
+}
+
 .nav-h1:hover, ul.dropdown-menu li.nav-h2 a:hover, .nav-h2:hover {
 	background-color: rgba(24, 232, 163, 0.5);
 	background-image: none;
@@ -76,9 +85,27 @@ img.icons {
     padding: 10px;
 }
 
-.sidebar {
+.container {
+    margin-left: 0px;
 }
 
-.container {
-margin-left: 0px;
+.archive-months, .archive-posts{
+    display: none;
+}
+
+.year, .month {
+    cursor: pointer;
+}
+
+.card-img-top{
+    object-fit: fill;
+    height: 60%;
+}
+
+.card {
+    height: 100%;
+}
+
+.card-title, .card-text {
+    color: black;
 }

@@ -1,10 +1,8 @@
 package com.thejoeflow.website
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import com.google.api.client.auth.oauth2.Credential
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow
@@ -13,18 +11,15 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.services.blogger.Blogger
 import com.google.api.services.blogger.BloggerScopes
-import com.google.api.services.blogger.model.Blog
 import org.springframework.stereotype.Service
 import java.io.File
 import java.io.FileInputStream
-import java.io.FileOutputStream
 import java.io.InputStreamReader
 import java.text.DateFormatSymbols
-import java.time.LocalDate
 import java.util.*
 import kotlin.collections.HashMap
 import java.time.ZoneId
-
+import java.util.stream.Collectors
 
 
 @Service
@@ -37,7 +32,8 @@ class BlogService(){
 
         val mapper = ObjectMapper().registerKotlinModule()
 
-        val blogPostsOrdered = populateBlogCache()
+        val blogPostsOrdered = generateBlogCache()
+        val archiveMap = generateArchive()
 
         fun getPostsFromBlogger() {
                 val httpTransport = GoogleNetHttpTransport.newTrustedTransport()
@@ -75,8 +71,7 @@ class BlogService(){
                 }
         }
 
-        fun getArchive(): Map<String, Map<String, MutableList<BlogPost>>>{
-
+        fun generateArchive(): Map<String, Map<String, List<BlogPost>>>{
                 val archive = HashMap<String, MutableMap<String, MutableList<BlogPost>>>()
 
                 var ym: Array<String>
@@ -89,14 +84,25 @@ class BlogService(){
                                         month.add(post)
                                 }
                                 else {
-                                        year.put(ym[1], mutableListOf<BlogPost>(post))
+                                        year.put(ym[1], mutableListOf(post))
                                 }
                         }
                         else{
-                                archive.put(ym[0], mutableMapOf<String, MutableList<BlogPost>>(Pair(ym[1], mutableListOf<BlogPost>(post))))
+                                archive.put(ym[0], mutableMapOf(Pair(ym[1], mutableListOf(post))))
                         }
                 }
                 return archive
+        }
+
+        fun getArchive(): Map<String, Map<String, List<BlogPost>>>{
+                return archiveMap
+        }
+
+        fun getYearTotals(): Map<String, Int>{
+                return archiveMap.entries
+                                 .stream()
+                                 .collect(Collectors.toMap({(key, _) -> key},
+                                                           {(_, value) -> value.entries.flatMap({l -> l.value}).count()}))
         }
 
         fun getYearMonth(date: Date): Array<String> {
@@ -109,19 +115,17 @@ class BlogService(){
         }
 
         fun getPostById(id: String): BlogPost? {
-                for (blog in blogPostsOrdered){
-                        if(blog.id.toString().equals(id)){
-                                return blog
-                        }
-                }
-                return null
+                return blogPostsOrdered.stream()
+                                       .filter({bp -> bp.id.toString().equals(id)})
+                                       .findFirst()
+                                       .orElseThrow { Exception("No blog found!")}
         }
 
         fun getBlogPosts(amount: Int, offset: Int): Array<BlogPost>{
                 return Array(amount, {i -> blogPostsOrdered[i + offset]})
         }
 
-        fun populateBlogCache(): List<BlogPost> {
+        fun generateBlogCache(): List<BlogPost> {
 
                 val blogList = mutableListOf<BlogPost>()
                 var blogPost: BlogPost

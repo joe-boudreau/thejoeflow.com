@@ -8,37 +8,21 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Armata|Fjalla+One" rel="stylesheet">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="/style.css">
 	<title>The Joe Flow</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-			<li class="nav-item active">
-				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Link</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link disabled" href="#">Disabled</a>
-			</li>
-		</ul>
-		<form class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-		</form>
-	</div>
-</nav>
-<div class="jumbotron jumbotron-fluid" style="background-image: url('pb_flickr/jumbotron_example.jpg');">
+
+<div th:with="home=true">
+	<div th:insert="~{navbar}"/>
+</div>
+
+
+<div class="jumbotron jumbotron-fluid" style="background-image: url('/pb_flickr/jumbotron_example.jpg');">
 	<div class="row">
 		<div id="jumbotron-card" class="col-md-4 col-sm-12">
 			<div class="container">
-				<img style="width:100%;" src="logo_r4_large.png"/>
+				<img style="width:100%;" src="/logo_r4_large.png"/>
 				<p class="lead"><i>How odd I can have all this inside me, and to you it’s just words</i></p>
 			</div>
 		</div>
@@ -51,44 +35,27 @@
 			<p>My name is Joe. I like to code. I also like to read. I also like to write about coding and reading. Check out my blog.</p>
 		</div>
 		<div class="col-md-4 col-sm-12">
-			<img class="center-block mx-auto" src="joe.png" style="width: 300px;">
+			<img class="center-block mx-auto" src="/joe.png" style="width: 300px;">
 		</div>
 	</div>
 </div>
 <div class="container-fluid even">
-	<h1>Blog</h1>
+	<h1><a th:href="@{'/blog'}">Blog</a></h1>
 	<h3>Latest Posts</h3>
 	<div class="row">
-		<div class="col-md-4 col-sm-12">
+		<tr th:each="post,iter : ${posts}">
+		<div class="col-xl-2 col-lg-3 col-md-6 col-sm-12" th:classappend="${iter.index > 3} ? 'd-none d-xl-block' : ''">
+			<a th:href="@{'/blog/' + ${post.id}}">
 			<div class="card" style="width: 18rem;">
-				<img class="card-img-top" src="..." alt="Card image cap">
+				<img class="card-img-top" th:src="${post.firstImage}" alt="Blog Post Image">
 				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
+					<h5 class="card-title" th:text="${post.title}">Post Title</h5>
+					<p class="card-text" th:text="${post.first150Chars}">First Couple Sentences</p>
 				</div>
 			</div>
+			</a>
 		</div>
-		<div class="col-md-4 col-sm-12">
-			<div class="card" style="width: 18rem;">
-				<img class="card-img-top" src="..." alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4 col-sm-12">
-			<div class="card" style="width: 18rem;">
-				<img class="card-img-top" src="..." alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
-				</div>
-			</div>
-		</div>
+		</tr>
 	</div>
 </div>
 <div class="container-fluid odd">
@@ -106,13 +73,13 @@
 				</ol>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<img class="d-block w-100" src="pb_flickr/pb_example1.jpg" alt="First slide">
+						<img class="d-block w-100" src="/pb_flickr/pb_example1.jpg" alt="First slide">
 					</div>
 					<div class="carousel-item">
-						<img class="d-block w-100" src="pb_flickr/pb_example2.jpg" alt="Second slide">
+						<img class="d-block w-100" src="/pb_flickr/pb_example2.jpg" alt="Second slide">
 					</div>
 					<div class="carousel-item">
-						<img class="d-block w-100" src="pb_flickr/pb_example3.jpg" alt="Third slide">
+						<img class="d-block w-100" src="/pb_flickr/pb_example3.jpg" alt="Third slide">
 					</div>
 				</div>
 				<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -127,50 +94,8 @@
 		</div>
 	</div>
 </div>
-<div class="container-fluid even">
-	<div class="row">
-		<h1 class="mx-auto" id="Connect">Connect</h1>
-	</div>
-	<div class="row justify-content-center">
-		<div class="col-2">
-			<div class="text-center">
-				<a href="https://www.linkedin.com/in/joseph-boudreau-99998765">
-					<img class="icons" src="icons/LinkedIn.png" onmouseover="this.src='icons/LinkedIn-hover.png';" onmouseout="this.src='icons/LinkedIn.png';">
-				</a>
-			</div>
-		</div>
-		<div class="col-2">
-			<div class="text-center">
-				<a href="https://github.com/thejoeflow">
-					<img class="icons" src="icons/GitHub.png" onmouseover="this.src='icons/GitHub-hover.png';" onmouseout="this.src='icons/GitHub.png';">
-				</a>
-			</div>
-		</div>
-		<div class="col-2">
-			<div class="text-center icon-cn">
-				<a href="mailto:josephboudreau1@gmail.com">
-					<img class="icons" src="icons/gmail.png" onmouseover="this.src='icons/gmail-hover.png';" onmouseout="this.src='icons/gmail.png';">
-				</a>
-			</div>
-		</div>
-		<div class="col-2">
-			<div class="text-center">
-				<a href="https://www.vsco.co/thejoeflow">
-					<img class="icons" src="icons/vsco.png" onmouseover="this.src='icons/vsco-hover.png';" onmouseout="this.src='icons/vsco.png';">
-				</a>
-			</div>
-		</div>
-		<div class="col-2">
-			<div class="text-center">
-				<a href="https://hypem.com/thejoeflow">
-					<img class="icons" src="icons/hypem.png" onmouseover="this.src='icons/hypem-hover.png';" onmouseout="this.src='icons/hypem.png';">
-				</a>
-			</div>
-		</div>
-	</div>
-</div>
 
-
+<div th:insert="~{footer}"/>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

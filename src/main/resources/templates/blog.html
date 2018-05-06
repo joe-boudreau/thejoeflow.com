@@ -8,51 +8,16 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Armata|Fjalla+One" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <title>The Joe Flow</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="#"><img src="logo_r4.png"/></a>
-
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
+<div th:insert="~{navbar}"/>
 
 <div class="container odd">
     <div class="row">
-        <div class="col-md-3 col-12 sidebar">
-            <h3 id="Archive">Archive</h3>
-            <ul class="archive" style="list-style: none">
-                <li th:each="year: ${archive}"><a><span class="archive-selector">▶</span> <span th:text="${year.key}">year</span> <span th:test="'[' + ${year.value.size()} + ']'">[0]</span></a>
-                    <ul class="archive-months" style="list-style: none">
-                        <li th:each="month: ${year.value}"><a><span class="archive-selector">▶</span> <span th:text="${month.key}">month</span></a>
-                            <ul class="archive-posts" style="list-style: bullet">
-                                <li th:each="post: ${month.value}"><a th:href="@{'/blog/' + ${post.id}}"><span th:text="${post.title}">title</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        <div class="col-md-3 col-12 sidebar" th:insert="~{archive}"/>
+
         <div class="col-md-9 col-12">
             <tr th:each="post : ${posts}">
                 <div class="row">
@@ -69,55 +34,24 @@
     </div>
 </div>
 
-<div class="container-fluid even">
-    <div class="row">
-        <h1 class="mx-auto" id="Connect">Connect</h1>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-2">
-            <div class="text-center">
-                <a href="https://www.linkedin.com/in/joseph-boudreau-99998765">
-                    <img class="icons" src="icons/LinkedIn.png" onmouseover="this.src='icons/LinkedIn-hover.png';" onmouseout="this.src='icons/LinkedIn.png';">
-                </a>
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="text-center">
-                <a href="https://github.com/thejoeflow">
-                    <img class="icons" src="icons/GitHub.png" onmouseover="this.src='icons/GitHub-hover.png';" onmouseout="this.src='icons/GitHub.png';">
-                </a>
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="text-center icon-cn">
-                <a href="mailto:josephboudreau1@gmail.com">
-                    <img class="icons" src="icons/gmail.png" onmouseover="this.src='icons/gmail-hover.png';" onmouseout="this.src='icons/gmail.png';">
-                </a>
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="text-center">
-                <a href="https://www.vsco.co/thejoeflow">
-                    <img class="icons" src="icons/vsco.png" onmouseover="this.src='icons/vsco-hover.png';" onmouseout="this.src='icons/vsco.png';">
-                </a>
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="text-center">
-                <a href="https://hypem.com/thejoeflow">
-                    <img class="icons" src="icons/hypem.png" onmouseover="this.src='icons/hypem-hover.png';" onmouseout="this.src='icons/hypem.png';">
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
+<div th:insert="~{footer}"/>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    $(".year,.month").click(function(){
+        $(this).next("ul").toggle();
+        var selector = $(this).find("span.archive-selector");
+        if(selector.text() == "▼"){
+            selector.text("▶");
+        }
+        else{
+            selector.text("▼");
+        }
+    })
+</script>
 </body>
 </html>

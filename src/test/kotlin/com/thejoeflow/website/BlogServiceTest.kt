@@ -7,6 +7,6 @@ class BlogServiceTest{
 
     @Test
     fun getPostsFromBloggerTest(){
-        getPostsFromBlogger()
+        BlogService().getPostsFromBlogger()
     }
 }
