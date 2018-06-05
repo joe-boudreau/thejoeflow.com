@@ -11,6 +11,7 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.services.blogger.Blogger
 import com.google.api.services.blogger.BloggerScopes
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import java.io.File
 import java.io.FileInputStream
@@ -23,7 +24,9 @@ import java.util.stream.Collectors
 
 
 @Service
-class BlogService(){
+class BlogService(
+        private val postRepository: PostRepositoryInterface
+) {
 
         val CLIENT_ID_FILE = "build/resources/main/private/client_secret_983358690299-a0kc29n179c2gat4fkk0nlpj9dc7q30p.apps.googleusercontent.com.json"
         val APP_NAME = "website-blog"
@@ -32,7 +35,7 @@ class BlogService(){
 
         val mapper = ObjectMapper().registerKotlinModule()
 
-        val blogPostsOrdered = generateBlogCache()
+        val blogPostsOrdered = postRepository.findAllPostsSortedByPublishDateDesc()
         val archiveMap = generateArchive()
 
         fun getPostsFromBlogger() {
@@ -124,26 +127,4 @@ class BlogService(){
         fun getBlogPosts(amount: Int, offset: Int): Array<BlogPost>{
                 return Array(amount, {i -> blogPostsOrdered[i + offset]})
         }
-
-        fun generateBlogCache(): List<BlogPost> {
-
-                val blogList = mutableListOf<BlogPost>()
-                var blogPost: BlogPost
-                File(POST_DIRECTORY + "/").walk().forEach {
-                        if(it.isFile){
-                                blogList.add(mapper.readValue(it))
-                        }
-                }
-
-                blogList.sortByDescending(BlogPost::published)
-                return blogList
-        }
-
-        fun parseJSONToBlogPost(jsonPost: String): BlogPost {
-
-                val mapper = ObjectMapper().registerKotlinModule()
-                return mapper.readValue(jsonPost)
-
-        }
-
 }

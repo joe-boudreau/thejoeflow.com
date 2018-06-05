@@ -53,5 +53,7 @@ dependencies {
 	compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
 	compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+"
 	compile 'org.jsoup:jsoup:1.11.3'
+	compile 'org.springframework.data:spring-data-mongodb:2.0.7.RELEASE'
+
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
