@@ -1,4 +1,5 @@
-##My blog site
+## thejoeflow.com
+### My Personal Blog Site
 
 Developed in Kotlin using Spring Boot and the ThymeLeaf template engine
 
