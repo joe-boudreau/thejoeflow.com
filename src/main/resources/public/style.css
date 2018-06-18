@@ -28,6 +28,10 @@ h1 a {
     color: black;
 }
 
+a {
+    color: rgb(24, 232, 163);
+}
+
 a:hover{
     color: rgba(24, 232, 163, 0.5);
     text-decoration: none;
@@ -110,12 +114,22 @@ img.icons {
     color: black;
 }
 
-.arrow-icon {
+.blogNav:hover {
+     background-color: rgba(24, 232, 163, 0.5);
+ }
+
+/*.blogNav{
+    margin: 30% 0%;
 }
 
-.blogNav:hover {
-    background-color: rgba(24, 232, 163, 0.5);
+.blogNav:first-of-type{
+    margin-top: 0px;
 }
+
+.blogNav:last-of-type{
+    margin-bottom: 0px;
+}*/
+
 
 .alert-banner {
     background-color: rgba(255, 58, 58, 0.6);

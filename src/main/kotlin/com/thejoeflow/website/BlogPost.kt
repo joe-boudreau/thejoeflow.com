@@ -17,11 +17,11 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long,
                     @JsonProperty("updated") val updated: Date) {
 
     @Transient
-    private val htmlImageRegex = Regex("<img.*src=\\\"(.*?)\\\"")
+    private val parsedHtml = Jsoup.parse(content)
     @Transient
     private val defaultImage = "/default_cover.jpg"
     @Transient
-    val firstImage = htmlImageRegex.find(content, 0)?.groups?.get(1)?.value ?: defaultImage
+    val firstImage = parsedHtml.selectFirst("img")?.attr("src") ?: defaultImage
     @Transient
-    val first150Chars = Jsoup.parse(content).text().substring(0,150) + "..."
+    val first150Chars = parsedHtml.text().substring(0,150) + "..."
 }

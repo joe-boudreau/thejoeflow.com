@@ -13,31 +13,53 @@
 </head>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <body>
-<div th:insert="~{navbar}"/>
+<div id="navbar" th:insert="~{navbar}"/>
 
-<div class="container odd">
+<div class="container-fluid odd">
     <div class="row">
-        <div class="col-md-3 col-12 sidebar">
+        <div class="col-md-2 col-12 sidebar mr-3">
             <div class="container sticky-top">
                 <div class="row" id="archiveRow" th:insert="~{archive}"/>
-                <div class="row pull-down">
-                    <div class="col-12">
-                        <div class="row blogNav text-center">
-                            <div class="col-12">
-                                <img class="arrow-icon" id="top-of-page" src="double-up-arrow.png" alt="Top of Page">
-                            </div>
+            </div>
+        </div>
+
+        <div id="posts" class="col-md-7 col-12">
+            <tr th:each="post : ${posts}">
+                <div class="blog-post pb-5">
+                    <div class="row">
+                        <h1 th:text="${post.title}">Post Title</h1>
+                    </div>
+                    <div class="row">
+                        <h3 th:text="${post.published}">published date</h3>
+                    </div>
+                    <div class="row">
+                        <div class="post-content" th:utext="${post.content}">post content</div>
+                    </div>
+                </div>
+
+            </tr>
+        </div>
+
+        <div class="col-md-2 d-none d-lg-block">
+            <div class="container sticky-top">
+                <div id="nav-col" class="col-12">
+                    <div class="row blogNav text-center">
+                        <div class="col-12">
+                            <img class="arrow-icon" id="top-of-page" src="double-up-arrow.png" alt="Top of Page">
                         </div>
-                        <div class="row blogNav text-center">
+                    </div>
+                    <div id="pull-down">
+                        <div class="row blogNav text-center my-2">
                             <div class="col-12">
                                 <img class="arrow-icon" id="prev-post" src="up-arrow.png" alt="Up Arrow">
                             </div>
                         </div>
-                        <div class="row blogNav text-center">
+                        <div class="row blogNav text-center my-2">
                             <div class="col-12">
                                 <img class="arrow-icon" id="next-post" src="down-arrow.png" alt="Down Arrow">
                             </div>
@@ -45,20 +67,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-9 col-12">
-            <tr th:each="post : ${posts}">
-                <div class="row">
-                    <h1 th:text="${post.title}">Post Title</h1>
-                </div>
-                <div class="row">
-                    <h3 th:text="${post.published}">published date</h3>
-                </div>
-                <div class="row">
-                    <div class="post-content" th:utext="${post.content}">post content</div>
-                </div>
-            </tr>
         </div>
     </div>
 </div>
@@ -77,12 +85,50 @@
         }
     });
 
-    $('.pull-down').each(function() {
-        var $this = $(this);
-        var container = $this.parent().parent().parent().parent();
-        var containerPadding = container.innerWidth() - container.width();
-        $this.css('padding-top', window.innerHeight - $(".navbar").outerHeight() - $("#archiveRow").outerHeight() - containerPadding - $this.height())
+    $("#next-post").click(function(){
+        var currScroll = $(window).scrollTop() + 5;
+
+        if(currScroll < $( ".blog-post:nth-child(2)" ).offset().top){
+            $('html, body').animate({scrollTop: $( ".blog-post:nth-child(2)" ).offset().top},300);
+
+        }
+        else if(currScroll < $( ".blog-post:nth-child(3)" ).offset().top){
+            $('html, body').animate({scrollTop: $( ".blog-post:nth-child(3)" ).offset().top},300);
+        }
     });
+
+    $("#prev-post").click(function(){
+        var currScroll = $(window).scrollTop() + 5;
+
+        if(currScroll >= $( ".blog-post:nth-child(3)" ).offset().top){
+            $('html, body').animate({scrollTop: $( ".blog-post:nth-child(2)" ).offset().top},300);
+
+        }
+        else if(currScroll >= $( ".blog-post:nth-child(2)" ).offset().top){
+            $('html, body').animate({scrollTop: $( ".blog-post:nth-child(1)" ).offset().top},300);
+        }
+    });
+
+     $("#top-of-page").click(function(){
+        $('html, body').animate({scrollTop: 0}, 300);
+     });
+
+    $(function() {
+        var timer_id;
+
+        $(window).resize(function() {
+            clearTimeout(timer_id);
+            timer_id = setTimeout(function() {pullDivDown()}, 300);
+        });
+    });
+
+    $(window).load(setTimeout(function() {pullDivDown()}, 100));
+
+    function pullDivDown(){
+        $("#nav-col").css("height", window.innerHeight);
+        $("#pull-down").css('margin-top', $("#nav-col").height() - $("#pull-down").height() - $("#pull-down").prev().height());
+    }
+
 </script>
 </body>
 </html>
