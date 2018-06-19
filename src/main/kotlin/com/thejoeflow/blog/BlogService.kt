@@ -1,4 +1,4 @@
-package com.thejoeflow.website
+package com.thejoeflow.blog
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -11,16 +11,15 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.services.blogger.Blogger
 import com.google.api.services.blogger.BloggerScopes
-import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStreamReader
 import java.text.DateFormatSymbols
-import java.util.*
-import kotlin.collections.HashMap
 import java.time.ZoneId
+import java.util.*
 import java.util.stream.Collectors
+import kotlin.collections.HashMap
 
 
 @Service
@@ -35,7 +34,7 @@ class BlogService(
 
         val mapper = ObjectMapper().registerKotlinModule()
 
-        val blogPostsOrdered = postRepository.findAllPostsSortedByPublishDateDesc()
+        val blogPostsOrdered = postRepository.findAllBlogPostsSortedByPublishDateDesc()
         val archiveMap = generateArchive()
 
         fun getPostsFromBlogger() {
@@ -75,6 +74,7 @@ class BlogService(
         }
 
         fun generateArchive(): Map<String, Map<String, List<BlogPost>>>{
+
                 val archive = HashMap<String, MutableMap<String, MutableList<BlogPost>>>()
 
                 var ym: Array<String>
@@ -125,6 +125,13 @@ class BlogService(
         }
 
         fun getBlogPosts(amount: Int, offset: Int): Array<BlogPost>{
-                return Array(amount, {i -> blogPostsOrdered[i + offset]})
+                var available = Math.min(amount, blogPostsOrdered.size)
+                return Array(available, {i -> blogPostsOrdered[i + offset]})
+        }
+
+        fun getBlogPosts(amount: Int, offset: Int, type: PostType): Array<BlogPost>{
+                var blogPostsOfType = blogPostsOrdered.filter { bp -> bp.type == type }
+                var available = Math.min(amount, blogPostsOfType.size)
+                return Array(available, {i -> blogPostsOfType[i + offset]})
         }
 }

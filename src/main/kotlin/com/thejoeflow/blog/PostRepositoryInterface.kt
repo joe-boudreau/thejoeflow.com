@@ -1,4 +1,4 @@
-package com.thejoeflow.website
+package com.thejoeflow.blog
 
 import org.springframework.data.mongodb.repository.MongoRepository
 
@@ -6,5 +6,5 @@ interface PostRepositoryInterface: MongoRepository<BlogPost, Long>, PostReposito
 
 interface PostRepositoryInterfaceCustom {
 
-    fun findAllPostsSortedByPublishDateDesc(): List<BlogPost>
+    fun findAllBlogPostsSortedByPublishDateDesc(): List<BlogPost>
 }

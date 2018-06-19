@@ -1,4 +1,4 @@
-package com.thejoeflow.website
+package com.thejoeflow.blog
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -14,7 +14,9 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long,
                     @JsonProperty("title") val title: String,
                     @JsonProperty("content") val content: String,
                     @JsonProperty("published") val published: Date,
-                    @JsonProperty("updated") val updated: Date) {
+                    @JsonProperty("updated") val updated: Date,
+                    @JsonProperty("type") var type: PostType = PostType.BOOKREVIEW
+                    ) {
 
     @Transient
     private val parsedHtml = Jsoup.parse(content)
@@ -24,4 +26,8 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long,
     val firstImage = parsedHtml.selectFirst("img")?.attr("src") ?: defaultImage
     @Transient
     val first150Chars = parsedHtml.text().substring(0,150) + "..."
+}
+
+enum class PostType {
+    BOOKREVIEW, POST
 }

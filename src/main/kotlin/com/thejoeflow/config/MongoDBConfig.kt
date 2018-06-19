@@ -1,6 +1,5 @@
 package com.thejoeflow.config
 
-import com.mongodb.Mongo
 import com.mongodb.MongoClient
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration
@@ -8,11 +7,11 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 
 @Configuration
-@EnableMongoRepositories("org.thejoeflow.repository")
+@EnableMongoRepositories(basePackages = arrayOf("com.thejoeflow.blog", "com.thejoeflow.config"))
 class MongoConfig(): AbstractMongoConfiguration() {
 
     override fun getDatabaseName(): String  {
-        return "flowDB"
+        return "test"
     }
 
     override fun mongoClient(): MongoClient{

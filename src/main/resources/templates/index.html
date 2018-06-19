@@ -19,16 +19,15 @@
 
 
 <div class="jumbotron jumbotron-fluid" style="background-image: url('/pb_flickr/jumbotron_example.jpg');">
-	<div class="row">
+	<div class="row  mb-5">
 		<div id="jumbotron-card" class="col-md-4 col-sm-12">
 			<div class="container">
 				<img style="width:100%;" src="/logo_r4_large.png"/>
-				<p class="lead"><i>How odd I can have all this inside me, and to you it’s just words</i></p>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="container-fluid odd">
+<div class="container-fluid odd mt-5">
 	<div class="row">
 		<div class="col-md-8 col-sm-12">
 			<h1 id="About">About</h1>
@@ -39,25 +38,43 @@
 		</div>
 	</div>
 </div>
+
 <div class="container-fluid even">
 	<h1><a th:href="@{'/blog'}">Blog</a></h1>
-	<h3>Latest Posts</h3>
+	<h3>Latest Book Reviews</h3>
 	<div class="row">
-		<tr th:each="post,iter : ${posts}">
-		<div class="col-xl-2 col-lg-3 col-md-6 col-sm-12" th:classappend="${iter.index > 3} ? 'd-none d-xl-block' : ''">
-			<a th:href="@{'/blog/' + ${post.id}}">
-			<div class="card" style="width: 18rem;">
-				<img class="card-img-top" th:src="${post.firstImage}" alt="Blog Post Image">
-				<div class="card-body">
-					<h5 class="card-title" th:text="${post.title}">Post Title</h5>
-					<p class="card-text" th:text="${post.first150Chars}">First Couple Sentences</p>
-				</div>
+		<tr th:each="post,iter : ${bookReviews}">
+			<div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 post-card" th:classappend="${iter.index > 3} ? 'd-none d-xl-block' : ''">
+				<a th:href="@{'/blog/' + ${post.id}}">
+					<div class="card">
+						<img class="card-img-top" th:src="${post.firstImage}" alt="Blog Post Image">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${post.title}">Post Title</h5>
+							<p class="card-text" th:text="${post.first150Chars}">First Couple Sentences</p>
+						</div>
+					</div>
+				</a>
 			</div>
-			</a>
-		</div>
+		</tr>
+	</div>
+
+	<h3 class="mt-3">Other Posts</h3>
+	<div class="row">
+		<tr th:each="post,iter : ${otherPosts}">
+			<div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 post-card" th:classappend="${iter.index > 3} ? 'd-none d-xl-block' : ''">
+				<a th:href="@{'/blog/' + ${post.id}}">
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title" th:text="${post.title}">Post Title</h4>
+							<p class="card-text" th:text="${post.first150Chars}">First Couple Sentences</p>
+						</div>
+					</div>
+				</a>
+			</div>
 		</tr>
 	</div>
 </div>
+
 <div class="container-fluid odd">
 	<div class="row">
 		<div class="col-md-6 col-sm-12">

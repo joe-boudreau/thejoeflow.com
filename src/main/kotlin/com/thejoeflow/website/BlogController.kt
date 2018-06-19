@@ -1,5 +1,7 @@
 package com.thejoeflow.website
 
+import com.thejoeflow.blog.BlogPost
+import com.thejoeflow.blog.BlogService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -18,9 +20,7 @@ class BlogController(
     }
 
     @GetMapping("/blog")
-    fun getPost(): String {
-        return "blog"
-    }
+    fun getBlog(): String = "blog"
 
     @ModelAttribute("posts")
     fun blogPosts(): Array<BlogPost> {
@@ -34,7 +34,6 @@ class BlogController(
 
     @ModelAttribute("yearTotals")
     fun getYearTotals(): Map<String, Int>{
-        val t = blogService.getYearTotals()
-        return t
+        return blogService.getYearTotals()
     }
 }
