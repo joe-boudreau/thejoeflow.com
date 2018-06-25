@@ -6,22 +6,23 @@ import org.jsoup.Jsoup
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.Transient
 import org.springframework.data.mongodb.core.mapping.Document
+import java.time.Instant
 import java.util.*
 
 @Document
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class BlogPost(@JsonProperty("id") @Id val id: Long,
-                    @JsonProperty("title") val title: String,
-                    @JsonProperty("content") val content: String,
-                    @JsonProperty("published") val published: Date,
-                    @JsonProperty("updated") val updated: Date,
+data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
+                    @JsonProperty("title") var title: String,
+                    @JsonProperty("content") var content: String,
+                    @JsonProperty("published") var published: Date = Date.from(Instant.now()),
+                    @JsonProperty("updated") var updated: Date  = Date.from(Instant.now()),
                     @JsonProperty("type") var type: PostType = PostType.BOOKREVIEW
                     ) {
 
     @Transient
     private val parsedHtml = Jsoup.parse(content)
     @Transient
-    private val defaultImage = "/default_cover.jpg"
+    private val defaultImage = "images/default_cover.png"
     @Transient
     val firstImage = parsedHtml.selectFirst("img")?.attr("src") ?: defaultImage
     @Transient

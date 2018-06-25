@@ -3,11 +3,11 @@
 <div>
     <h3 id="Archive">Archive</h3>
     <ul class="archive" style="list-style: none">
-        <li th:each="year: ${archive}"><a class="year"><span class="archive-selector">▶</span> <span th:text="${year.key}">year</span> <span th:text="'[' + ${yearTotals.get(year.key)} + ']'">[0]</span></a>
+        <li th:each="year: ${archive}"><a class="year clicky"><span class="archive-selector">▶</span> <span th:text="${year.key}">year</span> <span th:text="'[' + ${yearTotals.get(year.key)} + ']'">[0]</span></a>
             <ul class="archive-months" style="list-style: none">
-                <li th:each="month: ${year.value}"><a class="month"><span class="archive-selector">▶</span> <span th:text="${month.key}">month</span></a>
+                <li th:each="month: ${year.value}"><a class="month clicky"><span class="archive-selector">▶</span> <span th:text="${month.key}">month</span></a>
                     <ul class="archive-posts">
-                        <li th:each="post: ${month.value}"><a th:href="@{'/blog/' + ${post.id}}"><span th:text="${post.title}">title</span></a></li>
+                        <li th:each="post: ${month.value}"><a th:href="@{'/blog/post?id=' + ${post.id}}"><span th:text="${post.title}">title</span></a></li>
                     </ul>
                 </li>
             </ul>

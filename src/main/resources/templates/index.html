@@ -22,19 +22,26 @@
 	<div class="row  mb-5">
 		<div id="jumbotron-card" class="col-md-4 col-sm-12">
 			<div class="container">
-				<img style="width:100%;" src="/logo_r4_large.png"/>
+				<img style="width:100%;" src="/images/logo_r4_large.png"/>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="container-fluid odd mt-5">
 	<div class="row">
-		<div class="col-md-8 col-sm-12">
-			<h1 id="About">About</h1>
-			<p>My name is Joe. I like to code. I also like to read. I also like to write about coding and reading. Check out my blog.</p>
+		<div class="col-md-7 col-sm-12">
+			<h1 id="About">Hey</h1>
+			<p>Welcome to my blog. These days I'm mostly writing stuff about books I've read. You can check it out below and
+				<a href="#Connect">connect with me</a> to share your thoughts.</p>
+			<br>
+			<p>I built this site as a personal project, mostly because I was sick of Blogger, and I used the Spring Boot
+				framework and wrote it in Kotlin. You can view the source code on my
+				<a href="https://github.com/thejoeflow/thejoeflow.com">GitHub</a> if you're interested</p>
+			<br>
+			<p>Cheers,<br>Joe</p>
 		</div>
 		<div class="col-md-4 col-sm-12">
-			<img class="center-block mx-auto" src="/joe.png" style="width: 300px;">
+			<img class="center-block mx-auto" src="/images/joe.png" style="width: 300px;">
 		</div>
 	</div>
 </div>
@@ -45,7 +52,7 @@
 	<div class="row">
 		<tr th:each="post,iter : ${bookReviews}">
 			<div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 post-card" th:classappend="${iter.index > 3} ? 'd-none d-xl-block' : ''">
-				<a th:href="@{'/blog/' + ${post.id}}">
+				<a th:href="@{'/blog/post?id=' + ${post.id}}">
 					<div class="card">
 						<img class="card-img-top" th:src="${post.firstImage}" alt="Blog Post Image">
 						<div class="card-body">
@@ -62,7 +69,7 @@
 	<div class="row">
 		<tr th:each="post,iter : ${otherPosts}">
 			<div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 post-card" th:classappend="${iter.index > 3} ? 'd-none d-xl-block' : ''">
-				<a th:href="@{'/blog/' + ${post.id}}">
+				<a th:href="@{'/blog/post?id=' + ${post.id}}">
 					<div class="card">
 						<div class="card-body">
 							<h4 class="card-title" th:text="${post.title}">Post Title</h4>
@@ -119,17 +126,11 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/javascript/index.js"></script>
+<script src="/javascript/common.js"></script>
 <script>
-
-	function changeHeight() {
-		var width = $(window).width();
-		$(".jumbotron").css({
-			"height": width * 0.4
-		});
-	}
-	window.addEventListener('resize', changeHeight);
-	changeHeight();
-
+//Run when page loads
+changeHeight();
 </script>
 </body>
 </html>

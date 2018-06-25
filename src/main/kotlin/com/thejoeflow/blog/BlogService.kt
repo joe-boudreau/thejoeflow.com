@@ -34,7 +34,8 @@ class BlogService(
 
         val mapper = ObjectMapper().registerKotlinModule()
 
-        val blogPostsOrdered = postRepository.findAllBlogPostsSortedByPublishDateDesc()
+        var blogPostsOrdered = postRepository.findAllBlogPostsSortedByPublishDateDesc()
+
         val archiveMap = generateArchive()
 
         fun getPostsFromBlogger() {
@@ -117,15 +118,15 @@ class BlogService(
                 return DateFormatSymbols().months[number-1]
         }
 
-        fun getPostById(id: String): BlogPost? {
+        fun getPostById(id: Long): BlogPost? {
                 return blogPostsOrdered.stream()
-                                       .filter({bp -> bp.id.toString().equals(id)})
+                                       .filter({bp -> bp.id == id})
                                        .findFirst()
                                        .orElseThrow { Exception("No blog found!")}
         }
 
         fun getBlogPosts(amount: Int, offset: Int): Array<BlogPost>{
-                var available = Math.min(amount, blogPostsOrdered.size)
+                var available = Math.min(amount, blogPostsOrdered.size - offset)
                 return Array(available, {i -> blogPostsOrdered[i + offset]})
         }
 
@@ -134,4 +135,16 @@ class BlogService(
                 var available = Math.min(amount, blogPostsOfType.size)
                 return Array(available, {i -> blogPostsOfType[i + offset]})
         }
+
+
+        fun saveBlogPost(blogPost: BlogPost){
+                postRepository.save(blogPost)
+                reloadBlogCache()
+        }
+
+        private fun reloadBlogCache() {
+                blogPostsOrdered = postRepository.findAllBlogPostsSortedByPublishDateDesc()
+        }
+
+        fun getTotalNumberOfPosts(): Int = blogPostsOrdered.size
 }

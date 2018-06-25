@@ -12,13 +12,13 @@
     <title>The Joe Flow</title>
 </head>
 <body>
-<div th:insert="~{navbar}"/>
+<div id="navbar" th:insert="~{navbar}"/>
 
 <div class="container odd">
     <div class="row">
         <div class="col-md-3 col-12 sidebar" th:insert="~{archive}"/>
 
-        <div class="col-md-9 col-12">
+        <div class="blog-post col-md-9 col-12">
             <div class="row">
                 <h1 th:text="${blogPost.title}">Post Title</h1>
             </div>
@@ -52,5 +52,6 @@
         }
     })
 </script>
+<script src="/javascript/common.js"></script>
 </body>
 </html>

@@ -7,24 +7,34 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
 class BlogController(
         private val blogService: BlogService
 ) {
 
-    @GetMapping("/blog/{id}")
-    fun getPost(model: Model, @PathVariable("id") id: Long): String {
-        model.addAttribute("blogPost", blogService.getPostById(id.toString()))
+    @GetMapping("/blog/post")
+    fun getPost(model: Model, @RequestParam("id") id: Long): String {
+        model.addAttribute("blogPost", blogService.getPostById(id))
         return "post"
     }
 
     @GetMapping("/blog")
-    fun getBlog(): String = "blog"
+    fun getBlogFirstPage(model: Model): String = getBlog(0 ,model)
 
-    @ModelAttribute("posts")
-    fun blogPosts(): Array<BlogPost> {
-        return blogService.getBlogPosts(3, 0)
+    @GetMapping("/blog/{page}")
+    fun getBlog(@PathVariable("page") page: Int = 0, model: Model): String {
+        model.addAttribute("totalPages", totalNumberOfPages())
+        model.addAttribute("currentPage", page)
+        model.addAttribute("posts", getThreeBlogPosts(page * 3))
+        return "blog"
+    }
+
+    private fun totalNumberOfPages() = Math.round(Math.ceil(blogService.getTotalNumberOfPosts() / 3.0)) - 1
+
+    fun getThreeBlogPosts(offset: Int): Array<BlogPost> {
+        return blogService.getBlogPosts(3, offset)
     }
 
     @ModelAttribute("archive")
