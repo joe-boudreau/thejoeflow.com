@@ -12,11 +12,11 @@ import java.util.*
 @Document
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
-                    @JsonProperty("title") var title: String,
-                    @JsonProperty("content") var content: String,
-                    @JsonProperty("published") var published: Date = Date.from(Instant.now()),
-                    @JsonProperty("updated") var updated: Date  = Date.from(Instant.now()),
-                    @JsonProperty("type") var type: PostType = PostType.BOOKREVIEW
+                    @JsonProperty("title") val title: String,
+                    @JsonProperty("content") val content: String,
+                    @JsonProperty("published") val published: Date = Date.from(Instant.now()),
+                    @JsonProperty("updated") val updated: Date  = Date.from(Instant.now()),
+                    @JsonProperty("type") val type: PostType = PostType.BOOKREVIEW
                     ) {
 
     @Transient

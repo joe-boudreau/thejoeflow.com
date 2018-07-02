@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 class MongoConfig(): AbstractMongoConfiguration() {
 
     override fun getDatabaseName(): String  {
-        return "test"
+        return "local"
     }
 
     override fun mongoClient(): MongoClient{

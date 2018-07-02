@@ -10,13 +10,6 @@ import org.springframework.web.bind.annotation.*
 @ResponseStatus
 class BlogRestEndpoint(private val blogService: BlogService) {
 
-    @PostMapping("/api/blogpost")
-    fun saveNewBlogPost(@RequestBody blogPost: BlogPost): ResponseEntity<String>{
-        blogPost.content = parseMarkdownToHtml(blogPost.content)
-        blogService.saveBlogPost(blogPost)
-        return ResponseEntity(HttpStatus.CREATED)
-    }
-
     @GetMapping("/api/blogpost/{id}")
     fun getBlogPostById(@PathVariable id: Long) : ResponseEntity<BlogPost>{
         val post = blogService.getPostById(id)
@@ -26,10 +19,25 @@ class BlogRestEndpoint(private val blogService: BlogService) {
         }
     }
 
+    @PostMapping("/api/blogpost")
+    fun saveNewBlogPost(@RequestParam(required = false) md: Boolean, @RequestBody blogPost: BlogPost): ResponseEntity<String>{
+
+        var blogPostToSave = blogPost
+        if(md){
+            blogPostToSave = blogPost.copy(content = parseMarkdownToHtml(blogPost.content))
+        }
+        blogService.saveBlogPost(blogPostToSave)
+        return ResponseEntity(HttpStatus.CREATED)
+    }
+
     @PutMapping("/api/blogpost/{id}")
-    fun updateBlogPost(@PathVariable id: Long, @RequestBody blogPost: BlogPost): ResponseEntity<String>{
-        blogPost.content = parseMarkdownToHtml(blogPost.content)
-        blogService.saveBlogPost(blogPost)
+    fun updateBlogPost(@RequestParam(required = false) md: Boolean, @PathVariable id: Long, @RequestBody blogPost: BlogPost): ResponseEntity<String>{
+
+        var blogPostToSave = blogPost.copy(id = id)
+        if(md){
+            blogPostToSave = blogPostToSave.copy(content = parseMarkdownToHtml(blogPost.content))
+        }
+        blogService.saveBlogPost(blogPostToSave)
         return ResponseEntity(HttpStatus.ACCEPTED)
     }
 }

@@ -26,10 +26,10 @@
             <tr th:each="post : ${posts}">
                 <div class="blog-post pb-5">
                     <div class="row">
-                        <h1 th:text="${post.title}">Post Title</h1>
+                        <a th:href="@{'/blog/post?id=' + ${post.id}}"><h1 th:text="${post.title}">Post Title</h1></a>
                     </div>
                     <div class="row">
-                        <h3 th:text="${post.published}">published date</h3>
+                        <h4 th:text="${#dates.format(post.published, 'EEEEEEEEEE, MMMMMMMMMMM d yyyy')}">published date</h4>
                     </div>
                     <div class="row">
                         <div class="post-content" th:utext="${post.content}">post content</div>
@@ -38,19 +38,15 @@
             </tr>
 
             <div class="row">
-                <div class="col-6 blogNav" th:unless="${currentPage == 0}">
-                    <a th:with="lastPage=${currentPage - 1}" th:href="@{'/blog/' + ${lastPage}}">
+                <div class="col-6 blogNav clicky" th:unless="${currentPage == 0}" th:with="lastPage=${currentPage - 1}" th:onclick="'goToBlogPage(\'' + ${lastPage} + '\');'">
                         <div id="back" class="row">
                             <img style="float:left" src="/images/double-left-arrow.png"><h2 style="margin:0px">Back</h2>
                         </div>
-                    </a>
                 </div>
-                <div class="col-6 blogNav" th:unless="${currentPage == totalPages}">
-                    <a th:with="nextPage=${currentPage + 1}" th:href="@{'/blog/' + ${nextPage}}">
+                <div class="col-6 blogNav clicky" th:unless="${currentPage == totalPages}" th:with="nextPage=${currentPage + 1}" th:onclick="'goToBlogPage(\'' + ${nextPage} + '\');'">
                         <div id="more" class="ml-5 float-right row">
                             <h2 style="margin:0px">More</h2><img style="float:right" src="/images/double-right-arrow.png">
                         </div>
-                    </a>
                 </div>
             </div>
         </div>

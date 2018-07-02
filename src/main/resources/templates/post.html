@@ -14,16 +14,16 @@
 <body>
 <div id="navbar" th:insert="~{navbar}"/>
 
-<div class="container odd">
+<div class="container-fluid odd">
     <div class="row">
-        <div class="col-md-3 col-12 sidebar" th:insert="~{archive}"/>
+        <div class="col-md-2 col-12 sidebar mr-5" th:insert="~{archive}"/>
 
-        <div class="blog-post col-md-9 col-12">
+        <div class="blog-post col-md-6 col-12">
             <div class="row">
                 <h1 th:text="${blogPost.title}">Post Title</h1>
             </div>
             <div class="row">
-                <h3 th:text="${blogPost.published}">published date</h3>
+                <h4 th:text="${#dates.format(blogPost.published, 'EEEEEEEEEE, MMMMMMMMMMM d yyyy')}">published date</h4>
             </div>
             <div class="row">
                 <div class="post-content" th:utext="${blogPost.content}">post content</div>

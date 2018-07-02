@@ -49,4 +49,8 @@ $(function() {
     });
 });
 
+function goToBlogPage(pageNum){
+    window.location.href = '/blog/' + pageNum;
+}
+
 $(window).load(setTimeout(function() {pullDivDown()}, 100));
