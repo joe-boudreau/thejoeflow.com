@@ -20,7 +20,7 @@
 
 <div class="jumbotron jumbotron-fluid" th:style="'background:url(' + @{'/pb_flickr/jumbotron_' + ${randNum} + '.jpg'} + ') center center/cover no-repeat;'">
 	<div class="row  mb-5">
-		<div id="jumbotron-card" class="col-md-4 col-sm-12">
+		<div id="jumbotron-card" class="col-4">
 			<div class="container">
 				<img style="width:100%;" src="/images/logo_r4_large.png"/>
 			</div>
@@ -41,7 +41,9 @@
 			<p>Cheers,<br>Joe</p>
 		</div>
 		<div class="col-md-4 col-sm-12">
-			<img class="center-block mx-auto" src="/images/joe.png" style="width: 300px;">
+			<div class="row text-center">
+				<img class="mx-auto" src="/images/joe.png" style="width: 300px;">
+			</div>
 		</div>
 	</div>
 </div>
@@ -51,7 +53,7 @@
 	<h3>Latest Book Reviews</h3>
 	<div class="row">
 		<tr th:each="post,iter : ${bookReviews}">
-			<div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 post-card" th:classappend="${iter.index > 3} ? 'd-none d-xl-block' : ''">
+			<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 my-3">
 				<a th:href="@{'/blog/post?id=' + ${post.id}}">
 					<div class="card">
 						<img class="card-img-top" th:src="${post.firstImage}" alt="Blog Post Image">
@@ -68,7 +70,7 @@
 	<h3 class="mt-3">Other Posts</h3>
 	<div class="row">
 		<tr th:each="post,iter : ${otherPosts}">
-			<div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 post-card" th:classappend="${iter.index > 3} ? 'd-none d-xl-block' : ''">
+			<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 my-3">
 				<a th:href="@{'/blog/post?id=' + ${post.id}}">
 					<div class="card">
 						<div class="card-body">
@@ -86,7 +88,7 @@
 	<div class="row">
 		<div class="col-md-6 col-sm-12">
 			<h1 id="Photos">Photos</h1>
-			<p>All photos on the site are courtesy of Paul Boudreau's fantastic Flickr. <a href="https://www.flickr.com/photos/41474913@N05/">Check it out!</a></p>
+			<p>All photos on the site are courtesy of Paul Boudreau's fantastic Flickr.<br><a href="https://www.flickr.com/photos/41474913@N05/">Check it out!</a></p>
 		</div>
 		<div class="col-md-6 col-sm-12">
 			<div id="carouselExampleIndicators" class="carousel slide mx-auto" data-ride="carousel" style="width:70%;">
@@ -96,15 +98,11 @@
 					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 				</ol>
 				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img class="d-block w-100" src="/pb_flickr/pb_example1.jpg" alt="First slide">
-					</div>
-					<div class="carousel-item">
-						<img class="d-block w-100" src="/pb_flickr/pb_example2.jpg" alt="Second slide">
-					</div>
-					<div class="carousel-item">
-						<img class="d-block w-100" src="/pb_flickr/pb_example3.jpg" alt="Third slide">
-					</div>
+					<tr th:each="url,iter : ${dadFlickrPhotos}">
+						<div class="carousel-item" th:classappend="${iter.index == 0} ? 'active' : ''">
+							<img class="carousel-image d-block w-100" th:src=${url}>
+						</div>
+					</tr>
 				</div>
 				<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 					<span class="carousel-control-prev-icon" aria-hidden="true"></span>

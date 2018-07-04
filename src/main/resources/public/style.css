@@ -156,3 +156,8 @@ div#footer{
 .blogNav{
     margin: 0px;
 }
+
+.carousel-image{
+    object-fit: cover;
+    object-position: center center;
+}
