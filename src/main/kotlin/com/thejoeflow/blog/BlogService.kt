@@ -36,7 +36,7 @@ class BlogService(
 
         var blogPostsOrdered = postRepository.findAllBlogPostsSortedByPublishDateDesc()
 
-        val archiveMap = generateArchive()
+        var archiveMap = generateArchive()
 
         fun getPostsFromBlogger() {
                 val httpTransport = GoogleNetHttpTransport.newTrustedTransport()
@@ -142,8 +142,14 @@ class BlogService(
                 reloadBlogCache()
         }
 
+        fun deleteBlogPost(id: Long){
+                postRepository.deleteById(id)
+                reloadBlogCache()
+        }
+
         private fun reloadBlogCache() {
                 blogPostsOrdered = postRepository.findAllBlogPostsSortedByPublishDateDesc()
+                archiveMap = generateArchive()
         }
 
         fun getTotalNumberOfPosts(): Int = blogPostsOrdered.size

@@ -16,15 +16,15 @@
 
 <div class="container-fluid odd">
     <div class="row">
-        <div class="col-md-2 col-12 sidebar mr-3">
+        <div class="col-lg-2 col-md-4 col-12 sidebar mr-3 pl-3">
             <div class="container sticky-top">
                 <div class="row" id="archiveRow" th:insert="~{archive}"/>
             </div>
         </div>
 
-        <div id="posts" class="col-md-6 col-12">
+        <div id="posts" class="col-lg-6 col-md-7 col-12">
             <tr th:each="post : ${posts}">
-                <div class="blog-post pb-5">
+                <div class="blog-post pb-5 px-3">
                     <div class="row">
                         <a th:href="@{'/blog/post?id=' + ${post.id}}"><h1 th:text="${post.title}">Post Title</h1></a>
                     </div>

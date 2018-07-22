@@ -141,7 +141,7 @@ div#footer{
     float: right;
     margin-bottom: 1em;
     margin-left: 1em;
-    max-width: 100%;
+    max-width: 50%;
     height: auto;
 }
 
@@ -160,4 +160,15 @@ div#footer{
 .carousel-image{
     object-fit: cover;
     object-position: center center;
+}
+
+.joe-img{
+    width: 65%;
+    max-width: 300px;
+    max-height: 300px;
+    object-fit: scale-down;
+}
+
+.archive-selector{
+    width: 15px;
 }

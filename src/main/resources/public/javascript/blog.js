@@ -1,11 +1,11 @@
 $(".year,.month").click(function(){
-    $(this).next("ul").toggle();
-    var selector = $(this).find("span.archive-selector");
-    if(selector.text() == "▼"){
-        selector.text("▶");
+    $(this).next("ul").slideToggle();
+    var selector = $(this).find("img.archive-selector");
+    if(selector.attr("src") == "/images/right.png"){
+        selector.attr("src", "/images/down.png");
     }
     else{
-        selector.text("▼");
+        selector.attr("src", "/images/right.png");
     }
 });
 
