@@ -136,7 +136,6 @@ class BlogService(
                 return Array(available, {i -> blogPostsOfType[i + offset]})
         }
 
-
         fun saveBlogPost(blogPost: BlogPost){
                 postRepository.save(blogPost)
                 reloadBlogCache()

@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Transient
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.Instant
 import java.util.*
+import kotlin.math.min
 
 @Document
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -26,7 +27,12 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
     @Transient
     val firstImage = parsedHtml.selectFirst("img")?.attr("src") ?: defaultImage
     @Transient
-    val first150Chars = parsedHtml.text().substring(0,150) + "..."
+    val first150Chars = getFirstChars()
+
+    private fun getFirstChars(): String {
+        val length = min(parsedHtml.text().length, 150)
+        return parsedHtml.text().substring(0, length) + "..."
+    }
 }
 
 enum class PostType {

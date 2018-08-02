@@ -1,0 +1,74 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Armata|Fjalla+One" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <title>The Joe Flow Admin Page</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+                <h3>Select a Post to Edit:</h3>
+                <select class="form-control" th:field="${posts}"  id="postToEdit">
+                    <option th:each="post : ${posts}" th:value="${post.id}" th:text="${post.title}"></option>
+                </select>
+                <input id="getPost" type="button" value="Get Post"/>
+        </div>
+    </div>
+
+    <div class="row my-5 py-5"></div>
+
+    <div class="row">
+        <div class="col-12">
+            <form action="#"  th:object="${post}" th:action="@{'/editPost/' + ${post.id}}" method="post">
+                <h3>Title:</h3>
+                <input th:field="*{title}" type="text"/>
+                <h3>Post Type:</h3>
+                <select th:field="*{type}" class="form-control">
+                    <option value="BOOKREVIEW">Book Review</option>
+                    <option value="POST">Other Post</option>
+                </select>
+                <h3>Content:</h3>
+                <textarea style="width:100%" th:field="*{content}"></textarea>
+
+                <h3>id:</h3>
+                <input th:field="*{id}" type="text" readonly/>
+                <h3>Published:</h3>
+                <input th:field="*{published}" type="text" readonly/>
+                <h3>Updated:</h3>
+                <input th:field="*{updated}" type="text" readonly/>
+
+
+                <input type="submit" value="Submit!"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:if="${(param.result != null) and (param.result[0] == 'updated')}" id="updateDialog" title="Update Successful">
+    <p>The post was updated successfully</p>
+</div>
+
+
+
+</body>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+        $("#getPost").click(function(){
+            var postId = $("#postToEdit").val();
+            window.location = "/editPost/" + postId;
+        });
+</script>
+</html>
