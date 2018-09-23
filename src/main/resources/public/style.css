@@ -13,7 +13,7 @@
 }
 
 h1, h2, li.nav-h1 a{
-	font-family: 'Fjalla One', sans-serif !important!;
+	font-family: 'Fjalla One', sans-serif !important;
 }
 
 div, p, h3, h4, a, li, li.nav-h2 a {
@@ -133,7 +133,7 @@ div#footer{
     background-color: rgba(255, 58, 58, 0.6);
     width: 100%;
     text-align: center;
-    color: black !important!;
+    color: black !important;
 }
 
 .post-content img {
@@ -149,12 +149,18 @@ div#footer{
     margin-top: 30px;
 }
 
+.post-content blockquote{
+    margin: 0 10%;
+    text-align: justify;
+    background-color: rgba(24, 232, 163, 0.1);
+}
+
 #more, #back {
     color: black;
 }
 
 .blogNav{
-    margin: 0px;
+    margin: 0;
 }
 
 .carousel-image{
@@ -171,4 +177,9 @@ div#footer{
 
 .archive-selector{
     width: 15px;
+}
+
+#copyright{
+    font-size: 0.8rem;
+    text-align:center;
 }

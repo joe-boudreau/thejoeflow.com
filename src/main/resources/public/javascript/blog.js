@@ -36,10 +36,12 @@ $("#prev-post").click(function(){
 $("#top-of-page").click(function(){
     $('html, body').animate({scrollTop: 0}, 300);
 });
+
 function pullDivDown(){
     $("#nav-col").css("height", window.innerHeight);
     $("#pull-down").css('margin-top', $("#nav-col").height() - $("#pull-down").height() - $("#pull-down").prev().height());
 }
+
 $(function() {
     var timer_id;
 

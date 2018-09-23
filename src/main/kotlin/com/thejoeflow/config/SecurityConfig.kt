@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 
 
+
+
 @Configuration
 class WebSecurityConfiguration(private val customerUserDetailsService: CustomerUserDetailsService) : GlobalAuthenticationConfigurerAdapter() {
 
@@ -18,11 +20,10 @@ class WebSecurityConfiguration(private val customerUserDetailsService: CustomerU
 
 @Configuration
 @EnableWebSecurity
-class SecurityJavaConfig() : WebSecurityConfigurerAdapter() {
+class SecurityJavaConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
-        http.authorizeRequests().antMatchers("/api/*").fullyAuthenticated().and().
-                httpBasic().and().
-                csrf().disable()
+        http.authorizeRequests().antMatchers("/api/*").fullyAuthenticated().and().httpBasic()
+        http.authorizeRequests().antMatchers("/editPost/**").authenticated().and().formLogin()
     }
 }

@@ -3,7 +3,6 @@ package com.thejoeflow.website
 import com.thejoeflow.blog.BlogPost
 import com.thejoeflow.blog.BlogService
 import com.thejoeflow.blog.PostType
-import com.thejoeflow.config.CustomerUserDetailsService
 import com.thejoeflow.utils.FlickrService
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
@@ -13,7 +12,6 @@ import java.util.*
 @Controller
 class HomeController(
         private val blogService: BlogService,
-        private val customerUserDetailsService: CustomerUserDetailsService,
         private val flickrService: FlickrService
 ) {
     private val NUMBER_OF_BG_IMAGES = 10

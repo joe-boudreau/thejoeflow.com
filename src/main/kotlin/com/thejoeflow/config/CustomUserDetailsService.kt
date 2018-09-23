@@ -14,7 +14,7 @@ class CustomerUserDetailsService(private val userRepository: UserRepositoryInter
         userRepository.save(MongoUserDetails(user.username, passwordEncoded, user.authorities.map { ga -> ga.authority }))
     }
     override fun loadUserByUsername(email: String): UserDetails? {
-        var userFound = userRepository.findByEmail(email)
+        val userFound = userRepository.findByEmail(email)
         return userFound[0]
     }
 
