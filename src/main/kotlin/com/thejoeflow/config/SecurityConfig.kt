@@ -23,6 +23,7 @@ class WebSecurityConfiguration(private val customerUserDetailsService: CustomerU
 class SecurityJavaConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
+        http.csrf().disable()
         http.authorizeRequests().antMatchers("/api/*").fullyAuthenticated().and().httpBasic()
         http.authorizeRequests().antMatchers("/editPost/**").authenticated().and().formLogin()
     }
