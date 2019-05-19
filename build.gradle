@@ -41,6 +41,7 @@ repositories {
 
 
 dependencies {
+	compileOnly "org.springframework.boot:spring-boot-configuration-processor"
 	compile 'org.springframework.boot:spring-boot-starter-web'
 	compile 'org.springframework.boot:spring-boot-starter-security'
 	compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'

@@ -1,11 +1,12 @@
 package com.thejoeflow
 
+import com.thejoeflow.config.AppProperties
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+import org.springframework.web.servlet.resource.PathResourceResolver
 
 
 @SpringBootApplication
@@ -16,11 +17,15 @@ fun main(args: Array<String>) {
 }
 
 @Configuration
-class SecurityConfig(){
+class Resources(appProperties: AppProperties) : WebMvcConfigurer {
 
-    @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
+    val appProperties = appProperties
+
+    override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
+        registry.addResourceHandler("/covers/**")
+                .addResourceLocations("file:"+appProperties.coverFolder)
+                .setCachePeriod(3600)
+                .resourceChain(true)
+                .addResolver(PathResourceResolver())
     }
-
 }

@@ -2,13 +2,14 @@ package com.thejoeflow.utils
 
 import com.flickr4java.flickr.Flickr
 import com.flickr4java.flickr.REST
+import com.thejoeflow.config.AppProperties
 import org.springframework.stereotype.Service
 
 @Service
-class FlickrService(){
+class FlickrService(appProperties: AppProperties){
 
-    val apiKey = "57cd4c90c180344f68322adc76feb1d1"
-    val sharedSecret = "01c4143064408629"
+    val apiKey = appProperties.apiKey
+    val sharedSecret = appProperties.sharedSecret
 
     fun getPhotoURLSFromFeed() : List<String> {
 
