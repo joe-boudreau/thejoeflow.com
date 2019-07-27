@@ -27,10 +27,10 @@ class HomeController(
     }
 
     @ModelAttribute("bookReviews")
-    fun getLatestSixBookReviews(): Array<BlogPost> = blogService.getBlogPosts(6, 0, PostType.BOOKREVIEW)
+    fun getLatestSixBookReviews(): Array<BlogPost> = blogService.getBlogPosts(6, 0, PostType.FICTION_REVIEW, PostType.NON_FICTION_REVIEW)
 
     @ModelAttribute("otherPosts")
-    fun getLatestSixOtherPosts(): Array<BlogPost> = blogService.getBlogPosts(6, 0, PostType.POST)
+    fun getLatestSixOtherPosts(): Array<BlogPost> = blogService.getBlogPosts(6, 0, PostType.OTHER)
 
     @ModelAttribute("randNum")
     fun getRandomNumberForBgImage(): Int = Random().nextInt(NUMBER_OF_BG_IMAGES + 1)

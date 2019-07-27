@@ -12,13 +12,13 @@
     <title>The Joe Flow</title>
 </head>
 <body>
-<div id="navbar" th:insert="~{navbar}"/>
+<div id="navbar" th:insert="~{navbar}"></div>
 
 <div class="container-fluid odd">
     <div class="row">
         <div class="col-lg-2 col-md-4 col-12 sidebar mr-3 pl-3">
             <div class="container sticky-top">
-                <div class="row" id="archiveRow" th:insert="~{archive}"/>
+                <div class="row" id="archiveRow" th:insert="~{archive}"></div>
             </div>
         </div>
 
@@ -32,11 +32,12 @@
             <div class="row">
                 <div class="post-content" th:utext="${blogPost.content}">post content</div>
             </div>
+            <div class="row" id="score" th:insert="${blogPost.type == 'FICTION_REVIEW'} ? ~{fictionScore} : ~{nonFictionScore}"></div>
         </div>
     </div>
 </div>
 
-<div th:insert="~{footer}"/>
+<div th:insert="~{footer}"></div>
 
 
 <!-- Optional JavaScript -->

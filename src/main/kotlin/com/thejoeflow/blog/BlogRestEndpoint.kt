@@ -34,10 +34,11 @@ class BlogRestEndpoint(private val blogService: BlogService) {
     @PostMapping("/api/blogpost", consumes = ["multipart/form-data"])
     fun saveNewBlogPost(@RequestParam title: String,
                         @RequestParam type: PostType,
-                        @RequestParam content: MultipartFile): ResponseEntity<String>{
+                        @RequestParam content: MultipartFile,
+                        @RequestParam score: Score): ResponseEntity<String>{
 
 
-        var blogPostToSave = BlogPost(title = title, type = type, content = parseMarkdownToHtml(content))
+        var blogPostToSave = BlogPost(title = title, type = type, content = parseMarkdownToHtml(content), score = score)
 
         blogService.saveBlogPost(blogPostToSave)
         return ResponseEntity(HttpStatus.CREATED)

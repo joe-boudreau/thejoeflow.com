@@ -16,8 +16,9 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
                     @JsonProperty("title") val title: String = "",
                     @JsonProperty("content") val content: String = "",
                     @JsonProperty("published") val published: Date = Date.from(Instant.now()),
-                    @JsonProperty("updated") val updated: Date  = Date.from(Instant.now()),
-                    @JsonProperty("type") val type: PostType = PostType.BOOKREVIEW
+                    @JsonProperty("updated") var updated: Date  = Date.from(Instant.now()),
+                    @JsonProperty("type") val type: PostType = PostType.OTHER,
+                    @JsonProperty("score") val score: Score = Score(intArrayOf(0 , 0, 0), "")
                     ) {
 
     @Transient
@@ -35,6 +36,11 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
     }
 }
 
+@Document
+class Score(@JsonProperty("scores") val scores : IntArray,
+            @JsonProperty("sandwich") var sandwich : String)
+
 enum class PostType {
-    BOOKREVIEW, POST
+    //TODO: Remove these deprecated bitches
+    BOOKREVIEW, POST, FICTION_REVIEW, NON_FICTION_REVIEW,  OTHER
 }

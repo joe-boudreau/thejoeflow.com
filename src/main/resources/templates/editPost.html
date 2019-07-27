@@ -33,11 +33,22 @@
                 <input th:field="*{title}" type="text"/>
                 <h3>Post Type:</h3>
                 <select th:field="*{type}" class="form-control">
-                    <option value="BOOKREVIEW">Book Review</option>
-                    <option value="POST">Other Post</option>
+                    <option value="FICTION_REVIEW">Fiction Review</option>
+                    <option value="NON_FICTION_REVIEW">Non-Fiction Review</option>
+                    <option value="OTHER">Other Post</option>
                 </select>
                 <h3>Content:</h3>
                 <textarea style="width:100%" th:field="*{content}"></textarea>
+
+                <h3>Imagery / Value :</h3>
+                <input th:field="*{score.scores[0]}" type="number"/>
+                <h3>Entertainment / Interest :</h3>
+                <input th:field="*{score.scores[1]}" type="number"/>
+                <h3>Writing:</h3>
+                <input th:field="*{score.scores[2]}" type="number"/>
+
+                <h3>Sandwich Analogy:</h3>
+                <input th:field="*{score.sandwich}" type="text"/>
 
                 <h3>id:</h3>
                 <input th:field="*{id}" type="text" readonly/>

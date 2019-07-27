@@ -55,10 +55,16 @@ class WebSecurityConfiguration(private val customerUserDetailsService: CustomerU
 @EnableWebSecurity
 class SecurityJavaConfig : WebSecurityConfigurerAdapter() {
 
+    @Value("\${security.require.ssl}")
+    private val requireSSL: Boolean = true
+
     override fun configure(http: HttpSecurity) {
-        http.requiresChannel().anyRequest().requiresSecure()
+        if(requireSSL){
+            http.requiresChannel().anyRequest().requiresSecure()
+        }
         http.csrf().disable()
         http.authorizeRequests().antMatchers("/api/*").fullyAuthenticated().and().httpBasic()
+        http.authorizeRequests().antMatchers("/actuator/*").fullyAuthenticated().and().httpBasic()
         http.authorizeRequests().antMatchers("/editPost/**").authenticated().and().formLogin()
     }
 }

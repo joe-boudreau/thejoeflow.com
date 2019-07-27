@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<h3 style="margin-bottom:0">Fiction Scoring</h3>
+<div class="container-fluid score">
+    <div class="row">
+        <div class="col-sm">
+            <div class="row">
+                <div class="col">
+                    <h4 class="text-center">Imagery</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="text-center p-score"><span class="score-number" th:text="${blogPost.score.scores[0]}">6</span><span>/7</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="score-divider"></div>
+        <div class="col-sm">
+            <div class="row">
+                <div class="col">
+                    <h4 class="text-center">Entertainment</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="text-center p-score"><span class="score-number" th:text="${blogPost.score.scores[1]}">3.5</span><span>/7</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="score-divider"></div>
+        <div class="col-sm">
+            <div class="row">
+                <div class="col">
+                    <h4 class="text-center">Writing</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="text-center p-score"><span class="score-number" th:text="${blogPost.score.scores[2]}">4.5</span><span>/7</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <strong>🥪️If this book was a sandwich it would be: </strong><span th:text="${blogPost.score.sandwich}">sandwich score placeholder</span>
+    </div>
+</div>
+</html>

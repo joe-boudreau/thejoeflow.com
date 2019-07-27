@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import java.time.Instant
+import java.util.*
 
 @Controller
 class EditPostController(
@@ -28,6 +30,7 @@ class EditPostController(
 
     @PostMapping("/editPost/{id}")
     fun updateExistingPost(@PathVariable id: Long, @ModelAttribute blogPost: BlogPost): String{
+        blogPost.updated = Date.from(Instant.now())
         blogService.saveBlogPost(blogPost)
         return "redirect:/editPost/" + id +"?result=updated"
     }
