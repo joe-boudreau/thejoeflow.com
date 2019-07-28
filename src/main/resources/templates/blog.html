@@ -34,6 +34,7 @@
                     <div class="row">
                         <div class="post-content" th:utext="${post.content}">post content</div>
                     </div>
+                    <div class="row" id="score" th:insert="${post.type == T(com.thejoeflow.blog.PostType).FICTION_REVIEW} ? ~{fictionScore} : ~{nonFictionScore}"></div>
                 </div>
             </tr>
 
