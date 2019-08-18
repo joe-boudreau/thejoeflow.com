@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Armata|Fjalla+One" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
+    <link href="/shariff-3.2.1/shariff.complete.css" rel="stylesheet">
     <title>The Joe Flow</title>
 </head>
 <body>
@@ -23,18 +24,20 @@
         </div>
 
         <div id="posts" class="col-lg-6 col-md-7 col-12">
-            <tr th:each="post : ${posts}">
+            <tr th:each="blogPost : ${posts}">
                 <div class="blog-post pb-5 px-3">
                     <div class="row">
-                        <a th:href="@{'/blog/post?id=' + ${post.id}}"><h1 th:text="${post.title}">Post Title</h1></a>
+                        <a th:href="@{'/blog/post?id=' + ${blogPost.id}}"><h1 th:text="${blogPost.title}">Post Title</h1></a>
                     </div>
                     <div class="row">
-                        <h4 th:text="${#dates.format(post.published, 'EEEEEEEEEE, MMMMMMMMMMM d yyyy')}">published date</h4>
+                        <h4 th:text="${#dates.format(blogPost.published, 'EEEEEEEEEE, MMMMMMMMMMM d yyyy')}">published date</h4>
                     </div>
+                    <div class="row" th:insert="~{social}"></div>
                     <div class="row">
-                        <div class="post-content" th:utext="${post.content}">post content</div>
+                        <div class="post-content" th:utext="${blogPost.content}">post content</div>
                     </div>
-                    <div class="row" id="score" th:insert="${post.type == T(com.thejoeflow.blog.PostType).FICTION_REVIEW} ? ~{fictionScore} : ~{nonFictionScore}"></div>
+                    <div class="row" th:insert="${blogPost.type == T(com.thejoeflow.blog.PostType).FICTION_REVIEW} ? ~{fictionScore} : ~{}"></div>
+                    <div class="row" th:insert="${blogPost.type == T(com.thejoeflow.blog.PostType).NON_FICTION_REVIEW} ? ~{nonFictionScore} : ~{}"></div>
                 </div>
             </tr>
 
@@ -85,5 +88,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="/javascript/blog.js"></script>
 <script src="/javascript/common.js"></script>
+<script src="/shariff-3.2.1/shariff.min.js"></script>
 </body>
 </html>

@@ -184,7 +184,7 @@ div#footer{
     text-align:center;
 }
 
-.score {
+#score {
     border: 1px solid;
     border-radius: 20px;
 }
