@@ -32,7 +32,7 @@
                     <div class="row">
                         <h4 th:text="${#dates.format(blogPost.published, 'EEEEEEEEEE, MMMMMMMMMMM d yyyy')}">published date</h4>
                     </div>
-                    <div class="row" th:insert="~{social}"></div>
+                    <div class="row" th:insert="~{social}" th:with="url=@{${rootUrl} + '/blog/post?id=' + ${blogPost.id}}"></div>
                     <div class="row">
                         <div class="post-content" th:utext="${blogPost.content}">post content</div>
                     </div>

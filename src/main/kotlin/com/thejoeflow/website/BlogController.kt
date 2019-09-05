@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
+import javax.servlet.http.HttpServletRequest
+
 
 @Controller
 class BlogController(
@@ -45,5 +47,11 @@ class BlogController(
     @ModelAttribute("yearTotals")
     fun getYearTotals(): Map<String, Int>{
         return blogService.getYearTotals()
+    }
+
+    @ModelAttribute("rootUrl")
+    fun getRootUrl(request: HttpServletRequest): String{
+        val serverPort = if (request.serverPort == 80 || request.serverPort == 443) "" else ":" + request.serverPort
+        return request.scheme + "://" + request.serverName + serverPort + request.contextPath
     }
 }
