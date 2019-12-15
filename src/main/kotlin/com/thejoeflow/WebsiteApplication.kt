@@ -28,8 +28,8 @@ class Resources(appProperties: AppProperties) : WebMvcConfigurer {
                 .resourceChain(true)
                 .addResolver(PathResourceResolver())
 
-        registry.addResourceHandler("/images/**")
-                .addResourceLocations("file:"+appProperties.imageFolder)
+        registry.addResourceHandler("/photos/**")
+                .addResourceLocations("file:"+appProperties.photoFolder)
                 .setCachePeriod(3600)
                 .resourceChain(true)
                 .addResolver(PathResourceResolver())
