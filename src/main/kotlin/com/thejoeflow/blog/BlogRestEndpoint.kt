@@ -35,10 +35,11 @@ class BlogRestEndpoint(private val blogService: BlogService) {
     fun saveNewBlogPost(@RequestParam title: String,
                         @RequestParam type: PostType,
                         @RequestParam content: MultipartFile,
-                        @RequestParam score: Score): ResponseEntity<String>{
+                        @RequestParam score: Score?): ResponseEntity<String>{
 
-
-        var blogPostToSave = BlogPost(title = title, type = type, content = parseMarkdownToHtml(content), score = score)
+        val blogPostToSave = if (type == PostType.OTHER)
+            BlogPost(title = title, type = type, content = parseMarkdownToHtml(content)) else
+            BlogPost(title = title, type = type, content = parseMarkdownToHtml(content), score = score ?: return ResponseEntity(HttpStatus.BAD_REQUEST))
 
         blogService.saveBlogPost(blogPostToSave)
         return ResponseEntity(HttpStatus.CREATED)
