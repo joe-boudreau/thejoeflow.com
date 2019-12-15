@@ -24,6 +24,11 @@ class Resources(appProperties: AppProperties) : WebMvcConfigurer {
     override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
         registry.addResourceHandler("/covers/**")
                 .addResourceLocations("file:"+appProperties.coverFolder)
+                .setCachePeriod(3600)
+                .resourceChain(true)
+                .addResolver(PathResourceResolver())
+
+        registry.addResourceHandler("/images/**")
                 .addResourceLocations("file:"+appProperties.imageFolder)
                 .setCachePeriod(3600)
                 .resourceChain(true)
