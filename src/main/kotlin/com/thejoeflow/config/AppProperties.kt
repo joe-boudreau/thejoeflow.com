@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component
 @ConfigurationProperties("custom")
 class AppProperties{
     lateinit var coverFolder: String
+    lateinit var imageFolder: String
     lateinit var apiKey: String
     lateinit var sharedSecret: String
 }
