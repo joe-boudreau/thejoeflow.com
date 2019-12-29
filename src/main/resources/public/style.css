@@ -1,3 +1,12 @@
+/*Site Colour Palette*/
+:root {
+    --jf-beige: rgba(234, 229, 226, 1);
+    --jf-dark: rgba(15, 23, 35, 1);
+    --jf-blue: rgba(76, 113, 137, 1);
+    --jf-light: rgba(232, 231, 238, 1);
+    --jf-green: rgba(39, 62, 72, 1);
+}
+
 .blurred-img {
     position: absolute;
     top: 0;
@@ -20,37 +29,29 @@ div, p, h3, h4, a, li, li.nav-h2 a {
 	font-family: 'Armata', sans-serif;
 }
 
+a{
+    color: var(--jf-green);
+}
+
 li.open:hover {
-	background-color: #FFF;
-}
-
-h1 a {
-    color: black;
-}
-
-a {
-    color: rgb(24, 232, 163);
-}
-
-a:hover{
-    color: rgba(24, 232, 163, 0.5);
-    text-decoration: none;
+	background-color: var(--jf-light);
 }
 
 .nav-h1:hover, ul.dropdown-menu li.nav-h2 a:hover, .nav-h2:hover {
-	background-color: rgba(24, 232, 163, 0.5);
+	background-color: var(--jf-blue);
 	background-image: none;
 }
 
+.navbar{
+    background-color: var(--jf-beige);
+}
+
 .even {
-	background-color: #DBDBDB;
-    padding-top: 3%;
+	background-color: var(--jf-beige);
     padding-bottom: 3%;
 }
 
 .odd {
-	background-color: #ffffff;
-    padding-top: 3%;
     padding-bottom: 3%;
 }
 
@@ -86,7 +87,7 @@ img.icons {
 }
 
 #jumbotron-card{
-    background-color: #ffffff;
+    background-color: white;
     padding: 10px;
 }
 
@@ -112,28 +113,28 @@ img.icons {
 
 .card:hover{
     border-style: groove;
-    border-color: rgb(24, 232, 163);
+    border-color: var(--jf-blue);
 }
 
 .card-title, .card-text {
     color: black;
 }
 
-.blogNav:hover {
-     background-color: rgba(24, 232, 163, 0.5);
- }
-
 div#footer{
-    background-color: #DBDBDB;
+    background-color: var(--jf-light);
     padding:0px auto;
 }
 
 
 .alert-banner {
-    background-color: rgba(255, 58, 58, 0.6);
+    background-color: var(--jf-beige);
     width: 100%;
     text-align: center;
     color: black !important;
+}
+
+.post-content {
+    padding-top: 2%;
 }
 
 .post-content img {
@@ -150,9 +151,15 @@ div#footer{
 }
 
 .post-content blockquote{
-    margin: 0 10%;
+    display: flex;
+    margin: 3% 7%;
     text-align: justify;
-    background-color: rgba(24, 232, 163, 0.1);
+    background-color: var(--jf-beige);
+    padding: 1%;
+}
+
+.post-content blockquote p{
+    margin: auto;
 }
 
 #more, #back {
@@ -162,6 +169,16 @@ div#footer{
 .blogNav{
     margin: 0;
 }
+
+.blogNav:hover {
+    -webkit-animation: pulse 1s;
+    animation: pulse 1s;
+}
+
+button:hover::before {
+    transform: translate3d(-50%, -50%, 0) scale3d(15, 15, 15);
+}
+
 
 .carousel-image{
     object-fit: cover;
@@ -179,6 +196,13 @@ div#footer{
     width: 15px;
 }
 
+/* Desktop*/
+@media screen and (min-width: 768px) {
+    .show-desktop{
+        display: block;
+    }
+}
+
 #copyright{
     font-size: 0.8rem;
     text-align:center;
@@ -187,6 +211,7 @@ div#footer{
 #score {
     border: 1px solid;
     border-radius: 20px;
+    border-color: var(--jf-dark);
 }
 
 .score-number {
@@ -200,5 +225,42 @@ div#footer{
 .score-divider {
     width: 1px;
     margin: 10px 0;
-    background: lightgrey;
+    background: var(--jf-dark);
+}
+
+.link {
+    color: black;
+    position: relative;
+    text-decoration: none;
+}
+
+.archive-col {
+    border-right: 0.2pt solid var(--jf-blue);
+}
+
+.link::before {
+    content: '';
+    position: absolute;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--jf-blue);
+    transform-origin: bottom left;
+    transform: scaleX(1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.link:hover::before {
+    transform: scaleX(0);
+    transform-origin: bottom right;
+}
+
+.link:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.link:active{
+    color: var(--jf-blue);
 }

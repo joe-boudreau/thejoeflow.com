@@ -1,13 +1,15 @@
-$(".year,.month").click(function(){
+$(".year,.month, #archive-toggle").click(function(){
     $(this).next("ul").slideToggle();
     var selector = $(this).find("img.archive-selector");
-    if(selector.attr("src") == "/images/right.png"){
+    if(selector.attr("src") === "/images/right.png"){
         selector.attr("src", "/images/down.png");
     }
     else{
         selector.attr("src", "/images/right.png");
     }
 });
+
+$("#archive-toggle").click(function(){$("#archive-content").removeClass("show-desktop")});
 
 $("#next-post").click(function(){
     var currScroll = $(window).scrollTop() + 5;

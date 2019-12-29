@@ -3,7 +3,7 @@
 <head>
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 </head>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-light navbar-expand-lg">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,18 +13,15 @@
     <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-                <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link link" href="/home">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/blog">Blog</a>
+                <a class="nav-link link" href="/blog">Blog</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#Connect">Connect</a>
+                <a class="nav-link link" href="#Connect">Connect</a>
             </li>
         </ul>
     </div>
 </nav>
-<div class="navbar-expand-lg navbar-light">
-    <div th:unless="${home}" id="spoiler-alert" class="navbar-text alert-banner" ><b>Spoiler Alert:</b> Most of these book reviews contain spoilers. Do not read the post if you are reading, or planning to read, the book.</div>
-</div>
 </html>

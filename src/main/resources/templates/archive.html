@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <div data-role="collapsible">
-    <div class="clicky blogNav" data-toggle="collapse" data-target="#archive-content">
+    <div id="archive-toggle" class="clicky blogNav" data-toggle="collapse" data-target="#archive-content">
         <h3>Archive</h3>
     </div>
-    <div id="archive-content" class="collapse show row">
+    <div id="archive-content" class="collapse show-desktop show row">
         <ul class="archive" style="list-style: none">
             <li th:each="year: ${archive}"><a class="year clicky"><img class="archive-selector" src="/images/right.png"/> <span th:text="${year.key}">year</span> <span th:text="'[' + ${yearTotals.get(year.key)} + ']'">[0]</span></a>
                 <ul class="archive-months" style="list-style: none">

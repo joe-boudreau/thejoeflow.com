@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Armata|Fjalla+One" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/animate.css">
     <link href="/shariff-3.2.1/shariff.complete.css" rel="stylesheet">
     <title>The Joe Flow</title>
 </head>
@@ -17,7 +18,7 @@
 
 <div class="container-fluid odd">
     <div class="row">
-        <div class="col-lg-2 col-md-4 col-12 sidebar mr-3 pl-3">
+        <div class="col-lg-3 col-md-5 col-12 sidebar mr-3 pl-3 archive-col">
             <div class="container sticky-top">
                 <div class="row" id="archiveRow" th:insert="~{archive}"/>
             </div>
@@ -27,7 +28,7 @@
             <tr th:each="blogPost : ${posts}">
                 <div class="blog-post pb-5 px-3">
                     <div class="row">
-                        <a th:href="@{'/blog/post?id=' + ${blogPost.id}}"><h1 th:text="${blogPost.title}">Post Title</h1></a>
+                        <a class="link" th:href="@{'/blog/post?id=' + ${blogPost.id}}"><h1 th:text="${blogPost.title}">Post Title</h1></a>
                     </div>
                     <div class="row">
                         <h4 th:text="${#dates.format(blogPost.published, 'EEEEEEEEEE, MMMMMMMMMMM d yyyy')}">published date</h4>
@@ -42,12 +43,12 @@
             </tr>
 
             <div class="row">
-                <div class="col-6 blogNav clicky" th:unless="${currentPage == 0}" th:with="lastPage=${currentPage - 1}" th:onclick="'goToBlogPage(\'' + ${lastPage} + '\');'">
+                <div class="col-6 blogNav  clicky" th:unless="${currentPage == 0}" th:with="lastPage=${currentPage - 1}" th:onclick="'goToBlogPage(\'' + ${lastPage} + '\');'">
                         <div id="back" class="row">
                             <img style="float:left" src="/images/double-left-arrow.png"><h2 style="margin:0px">Back</h2>
                         </div>
                 </div>
-                <div class="col-6 blogNav clicky" th:unless="${currentPage == totalPages}" th:with="nextPage=${currentPage + 1}" th:onclick="'goToBlogPage(\'' + ${nextPage} + '\');'">
+                <div class="col-6 blogNav  clicky" th:unless="${currentPage == totalPages}" th:with="nextPage=${currentPage + 1}" th:onclick="'goToBlogPage(\'' + ${nextPage} + '\');'">
                         <div id="more" class="ml-5 float-right row">
                             <h2 style="margin:0px">More</h2><img style="float:right" src="/images/double-right-arrow.png">
                         </div>
@@ -58,18 +59,18 @@
         <div class="col-md-2 d-none d-lg-block">
             <div class="container sticky-top">
                 <div id="nav-col" class="col-12">
-                    <div class="row blogNav text-center clicky" id="top-of-page">
+                    <div class="row blogNav  text-center clicky" id="top-of-page">
                         <div class="col-12">
                             <img class="arrow-icon" src="/images/double-up-arrow.png" alt="Top of Page">
                         </div>
                     </div>
                     <div id="pull-down">
-                        <div class="row blogNav text-center my-2 clicky" id="prev-post">
+                        <div class="row blogNav  text-center my-2 clicky" id="prev-post">
                             <div class="col-12">
                                 <img class="arrow-icon" src="/images/up-arrow.png" alt="Up Arrow">
                             </div>
                         </div>
-                        <div class="row blogNav text-center my-2 clicky" id="next-post">
+                        <div class="row blogNav  text-center my-2 clicky" id="next-post">
                             <div class="col-12">
                                 <img class="arrow-icon" src="/images/down-arrow.png" alt="Down Arrow">
                             </div>

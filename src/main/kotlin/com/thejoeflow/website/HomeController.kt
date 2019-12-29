@@ -14,7 +14,6 @@ class HomeController(
         private val blogService: BlogService,
         private val flickrService: FlickrService
 ) {
-    private val NUMBER_OF_BG_IMAGES = 10
 
     @GetMapping("/home")
     fun getHome() : String {
@@ -31,9 +30,6 @@ class HomeController(
 
     @ModelAttribute("otherPosts")
     fun getLatestSixOtherPosts(): Array<BlogPost> = blogService.getBlogPosts(6, 0, PostType.OTHER)
-
-    @ModelAttribute("randNum")
-    fun getRandomNumberForBgImage(): Int = Random().nextInt(NUMBER_OF_BG_IMAGES + 1)
 
     @ModelAttribute("dadFlickrPhotos")
     fun getRecentFlickr(): List<String> = flickrService.getPhotoURLSFromFeed()
