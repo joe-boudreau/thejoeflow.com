@@ -156,6 +156,7 @@ div#footer{
     text-align: justify;
     background-color: var(--jf-beige);
     padding: 1%;
+    font-style: italic;
 }
 
 .post-content blockquote p{

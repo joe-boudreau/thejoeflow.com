@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component
 @Component
 @ConfigurationProperties("custom")
 class AppProperties{
-    lateinit var coverFolder: String
-    lateinit var photoFolder: String
-    lateinit var apiKey: String
-    lateinit var sharedSecret: String
+    var coverFolder: String = ""
+    var photoFolder: String = ""
+    var apiKey: String = ""
+    var sharedSecret: String = ""
 }
