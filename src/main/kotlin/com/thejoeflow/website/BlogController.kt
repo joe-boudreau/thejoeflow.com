@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 import javax.servlet.http.HttpServletRequest
+import kotlin.math.ceil
+import kotlin.math.roundToInt
 
 
 @Controller
@@ -33,7 +35,7 @@ class BlogController(
         return "blog"
     }
 
-    private fun totalNumberOfPages() = Math.round(Math.ceil(blogService.getTotalNumberOfPosts() / 3.0)) - 1
+    private fun totalNumberOfPages() = ceil(blogService.getTotalNumberOfPosts() / 3.0).roundToInt() - 1
 
     fun getThreeBlogPosts(offset: Int): Array<BlogPost> {
         return blogService.getBlogPosts(3, offset)

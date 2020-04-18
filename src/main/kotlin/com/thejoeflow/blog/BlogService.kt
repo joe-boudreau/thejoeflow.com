@@ -31,11 +31,11 @@ class BlogService(
                                         month.add(post)
                                 }
                                 else {
-                                        year.put(ym[1], mutableListOf(post))
+                                        year[ym[1]] = mutableListOf(post)
                                 }
                         }
                         else{
-                                archive.put(ym[0], mutableMapOf(Pair(ym[1], mutableListOf(post))))
+                                archive[ym[0]] = mutableMapOf(Pair(ym[1], mutableListOf(post)))
                         }
                 }
                 return archive
@@ -48,8 +48,9 @@ class BlogService(
         fun getYearTotals(): Map<String, Int>{
                 return archiveMap.entries
                                  .stream()
-                                 .collect(Collectors.toMap({(key, _) -> key},
-                                                           {(_, value) -> value.entries.flatMap({l -> l.value}).count()}))
+                                 .collect(Collectors.toMap(
+                                         {(key, _) -> key},
+                                         {(_, value) -> value.entries.flatMap { l -> l.value}.count()}))
         }
 
         fun getYearMonth(date: Date): Array<String> {
@@ -63,9 +64,9 @@ class BlogService(
 
         fun getPostById(id: Long): BlogPost? {
                 return blogPostsOrdered.stream()
-                                       .filter({bp -> bp.id == id})
-                                       .findFirst()
-                                       .orElseThrow { Exception("No blog found!")}
+                                        .filter { bp -> bp.id == id}
+                                        .findFirst()
+                                        .orElseThrow { Exception("No blog found!")}
         }
 
         fun getBlogPosts(amount: Int, offset: Int): Array<BlogPost>{
