@@ -32,11 +32,9 @@ class EditPostController(
     fun updateExistingPost(@PathVariable id: Long, @ModelAttribute blogPost: BlogPost): String{
         blogPost.updated = Date.from(Instant.now())
         blogService.saveBlogPost(blogPost)
-        return "redirect:/editPost/" + id +"?result=updated"
+        return "redirect:/editPost/$id?result=updated"
     }
 
     @ModelAttribute("posts")
-    fun getAllPosts(): List<BlogPost>{
-        return blogService.blogPostsOrdered
-    }
+    fun getAllPosts() = blogService.blogPostsOrdered
 }
