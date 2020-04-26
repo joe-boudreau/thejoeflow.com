@@ -5,7 +5,7 @@ import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.userdetails.UserDetails
 
 
-class MongoUserDetails(private val email: String, private val password: String, private val authorities: List<String>) : UserDetails {
+class MongoUserDetails(private val email: String, private val password: String, authorities: List<String>) : UserDetails {
 
     private val grantedAuthorities: List<GrantedAuthority> = AuthorityUtils.createAuthorityList(*authorities.toTypedArray())
 

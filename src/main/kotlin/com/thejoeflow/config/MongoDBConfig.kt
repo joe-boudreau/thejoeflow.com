@@ -7,8 +7,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 
 @Configuration
-@EnableMongoRepositories(basePackages = arrayOf("com.thejoeflow.blog", "com.thejoeflow.config"))
-class MongoConfig(): AbstractMongoConfiguration() {
+@EnableMongoRepositories(basePackages = ["com.thejoeflow.blog", "com.thejoeflow.config"])
+class MongoConfig: AbstractMongoConfiguration() {
 
     override fun getDatabaseName(): String  {
         return "local"

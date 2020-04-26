@@ -5,7 +5,7 @@ import java.text.DateFormatSymbols
 import java.time.ZoneId
 import java.util.*
 import java.util.stream.Collectors
-import kotlin.collections.HashMap
+import kotlin.collections.LinkedHashMap
 
 
 @Service
@@ -19,7 +19,7 @@ class BlogService(
 
         private final fun generateArchive(): Map<String, Map<String, List<BlogPost>>>{
 
-                val archive = HashMap<String, MutableMap<String, MutableList<BlogPost>>>()
+                val archive = LinkedHashMap<String, MutableMap<String, MutableList<BlogPost>>>()
 
                 var ym: Array<String>
                 for(post in blogPostsOrdered){

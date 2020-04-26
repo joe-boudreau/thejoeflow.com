@@ -14,7 +14,7 @@ fun parseMarkdownToHtml(md: String): String{
 
 fun parseMarkdownToHtml(md: MultipartFile): String{
     val parser = Parser.builder().build()
-    val document = parser.parseReader(InputStreamReader(md.inputStream));
+    val document = parser.parseReader(InputStreamReader(md.inputStream))
     val renderer = HtmlRenderer.builder().build()
     return renderer.render(document)
 }

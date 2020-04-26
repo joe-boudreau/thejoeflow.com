@@ -4,7 +4,6 @@ import com.flickr4java.flickr.Flickr
 import com.flickr4java.flickr.REST
 import com.thejoeflow.config.AppProperties
 import org.springframework.stereotype.Service
-import java.lang.Exception
 
 @Service
 class FlickrService(appProperties: AppProperties){
@@ -16,7 +15,8 @@ class FlickrService(appProperties: AppProperties){
 
         return try {
             val f = Flickr(apiKey, sharedSecret, REST())
-            val recentPhotos = f.photosInterface.getContactsPublicPhotos("57861973@N02", 3, false, false, true)
+            val recentPhotos = f.photosInterface
+                    .getContactsPublicPhotos("57861973@N02", 3, false, false, true)
             recentPhotos.map { photo -> photo.mediumUrl }
         }
         catch(e: Exception){

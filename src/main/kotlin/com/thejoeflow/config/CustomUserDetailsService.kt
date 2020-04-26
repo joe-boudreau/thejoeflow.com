@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 class CustomerUserDetailsService(private val userRepository: UserRepositoryInterface, private val passwordEncoder: PasswordEncoder) : UserDetailsService {
 
     fun save(user: MongoUserDetails) {
-        var passwordEncoded = passwordEncoder.encode(user.getPassword())
+        val passwordEncoded = passwordEncoder.encode(user.password)
         userRepository.save(MongoUserDetails(user.username, passwordEncoded, user.authorities.map { ga -> ga.authority }))
     }
     override fun loadUserByUsername(email: String): UserDetails? {

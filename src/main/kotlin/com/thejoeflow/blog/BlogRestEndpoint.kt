@@ -15,7 +15,7 @@ class BlogRestEndpoint(private val blogService: BlogService) {
     fun getBlogPostById(@PathVariable id: Long) : ResponseEntity<BlogPost>{
         val post = blogService.getPostById(id)
         return when(post != null){
-            true -> ResponseEntity.ok(post!!)
+            true -> ResponseEntity.ok(post)
             false -> ResponseEntity(HttpStatus.NOT_FOUND)
         }
     }
