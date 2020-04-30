@@ -4,12 +4,9 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.userdetails.UserDetails
 
+class MongoUserDetails(private val email: String, private val password: String, private val authorities: List<String>) : UserDetails {
 
-class MongoUserDetails(private val email: String, private val password: String, authorities: List<String>) : UserDetails {
-
-    private val grantedAuthorities: List<GrantedAuthority> = AuthorityUtils.createAuthorityList(*authorities.toTypedArray())
-
-    override fun getAuthorities() = grantedAuthorities
+    override fun getAuthorities(): List<GrantedAuthority> = AuthorityUtils.createAuthorityList(*authorities.toTypedArray())
     override fun getPassword() = password
     override fun getUsername() = email
 
