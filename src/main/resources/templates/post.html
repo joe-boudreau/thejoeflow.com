@@ -7,7 +7,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Armata|Fjalla+One" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/animate.css">
     <link href="/shariff-3.2.1/shariff.complete.css" rel="stylesheet">
@@ -18,13 +17,13 @@
 
 <div class="container-fluid odd">
     <div class="row">
-        <div class="col-lg-3 col-md-5 col-12 sidebar mr-3 pl-3 archive-col">
+        <div class="d-none d-lg-block col-lg-3 sidebar mr-3 pl-3 archive-col">
             <div class="container sticky-top">
                 <div class="row" id="archiveRow" th:insert="~{archive}"></div>
             </div>
         </div>
 
-        <div class="blog-post col-lg-6 col-md-7 col-12 px-4">
+        <div class="blog-post col-lg-6 col-12 px-4">
             <div class="row">
                 <h1 th:text="${blogPost.title}">Post Title</h1>
             </div>

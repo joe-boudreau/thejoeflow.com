@@ -1,15 +1,27 @@
 package com.thejoeflow.blog
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import com.thejoeflow.utils.parseMarkdownToHtml
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
+import java.io.InputStreamReader
 
 
 @RestController
 @ResponseStatus
 class BlogRestEndpoint(private val blogService: BlogService) {
+
+    @GetMapping("/api/blogpost")
+    fun getBlogPosts(@RequestParam(required = false) removeContent: Boolean) : ResponseEntity<List<BlogPost>>{
+        var posts = blogService.blogPostsOrdered
+        if (removeContent){
+            posts = posts.map { bp -> bp.copy(content = "")}
+        }
+        return ResponseEntity.ok(posts)
+    }
 
     @GetMapping("/api/blogpost/{id}")
     fun getBlogPostById(@PathVariable id: Long) : ResponseEntity<BlogPost>{
@@ -35,13 +47,25 @@ class BlogRestEndpoint(private val blogService: BlogService) {
     fun saveNewBlogPost(@RequestParam title: String,
                         @RequestParam type: PostType,
                         @RequestParam content: MultipartFile,
-                        @RequestParam score: Score?): ResponseEntity<String>{
+                        @RequestParam("score") scoreJSON: String?,
+                        @RequestParam(required = false) md: Boolean): ResponseEntity<String>{
 
-        val blogPostToSave = if (type == PostType.OTHER)
-            BlogPost(title = title, type = type, content = parseMarkdownToHtml(content)) else
-            BlogPost(title = title, type = type, content = parseMarkdownToHtml(content), score = score ?: return ResponseEntity(HttpStatus.BAD_REQUEST))
 
-        blogService.saveBlogPost(blogPostToSave)
+        var stringContent = InputStreamReader(content.inputStream).use(InputStreamReader::readText)
+        if (md){
+            stringContent = parseMarkdownToHtml(stringContent)
+        }
+
+        if (type == PostType.OTHER){
+            blogService.saveBlogPost(BlogPost(title = title, type = type, content = stringContent))
+        }
+        else{
+            if (scoreJSON == null){
+                return ResponseEntity(HttpStatus.BAD_REQUEST)
+            }
+            val score = jacksonObjectMapper().readValue<Score>(scoreJSON)
+            blogService.saveBlogPost(BlogPost(title = title, type = type, content = stringContent, score = score))
+        }
         return ResponseEntity(HttpStatus.CREATED)
     }
 

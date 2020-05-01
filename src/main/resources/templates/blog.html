@@ -18,13 +18,13 @@
 
 <div class="container-fluid odd">
     <div class="row">
-        <div class="col-lg-3 col-md-5 col-12 sidebar mr-3 pl-3 archive-col">
+        <div class="d-none d-lg-block col-lg-3 sidebar mr-3 pl-3 archive-col">
             <div class="container sticky-top">
                 <div class="row" id="archiveRow" th:insert="~{archive}"/>
             </div>
         </div>
 
-        <div id="posts" class="col-lg-6 col-md-7 col-12">
+        <div id="posts" class="col-lg-6 col-12">
             <tr th:each="blogPost : ${posts}">
                 <div class="blog-post pb-5 px-3">
                     <div class="row">

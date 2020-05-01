@@ -7,6 +7,48 @@
     --jf-green: rgba(39, 62, 72, 1);
 }
 
+/* noto-sans-regular - latin */
+@font-face {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Noto Sans'), local('NotoSans'),
+    url('fonts/noto-sans-v9-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('fonts/noto-sans-v9-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* noto-sans-italic - latin */
+@font-face {
+    font-family: 'Noto Sans';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Noto Sans Italic'), local('NotoSans-Italic'),
+    url('fonts/noto-sans-v9-latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('fonts/noto-sans-v9-latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* noto-sans-700italic - latin */
+@font-face {
+    font-family: 'Noto Sans';
+    font-style: italic;
+    font-weight: 700;
+    src: local('Noto Sans Bold Italic'), local('NotoSans-BoldItalic'),
+    url('fonts/noto-sans-v9-latin-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('fonts/noto-sans-v9-latin-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* noto-sans-700 - latin */
+@font-face {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Noto Sans Bold'), local('NotoSans-Bold'),
+    url('fonts/noto-sans-v9-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('fonts/noto-sans-v9-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+
+
 .blurred-img {
     position: absolute;
     top: 0;
@@ -22,15 +64,15 @@
 }
 
 h1, h2, li.nav-h1 a{
-	font-family: 'Fjalla One', sans-serif !important;
+    font-family: 'Noto Sans Bold', sans-serif
 }
 
 div, p, h3, h4, a, li, li.nav-h2 a {
-	font-family: 'Armata', sans-serif;
+	font-family: 'Noto Sans', sans-serif
 }
 
 a{
-    color: var(--jf-green);
+    color: var(--jf-blue);
 }
 
 li.open:hover {
@@ -151,16 +193,27 @@ div#footer{
 }
 
 .post-content blockquote{
-    display: flex;
+    display: flow-root;
     margin: 3% 7%;
     text-align: justify;
     background-color: var(--jf-beige);
     padding: 1%;
-    font-style: italic;
+    font-style: normal;
 }
 
 .post-content blockquote p{
     margin: auto;
+}
+
+.post-content blockquote p:last-child{
+    font-size: smaller;
+    font-style: italic;
+}
+
+.post-content blockquote p:first-child{
+    color: var(--jf-green);
+    font-size: inherit;
+    font-style: normal;
 }
 
 #more, #back {
@@ -237,6 +290,10 @@ button:hover::before {
 
 .archive-col {
     border-right: 0.2pt solid var(--jf-blue);
+}
+
+.archive {
+    padding-left: 0px
 }
 
 .link::before {

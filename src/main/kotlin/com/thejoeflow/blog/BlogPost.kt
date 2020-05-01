@@ -10,6 +10,7 @@ import java.time.Instant
 import java.util.*
 import kotlin.math.min
 
+
 @Document
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
@@ -37,7 +38,7 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
 }
 
 @Document
-class Score(@JsonProperty("scores") val scores : IntArray,
+data class Score(@JsonProperty("scores") val scores : IntArray,
             @JsonProperty("sandwich") var sandwich : String)
 
 enum class PostType {

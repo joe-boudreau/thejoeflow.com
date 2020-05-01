@@ -14,12 +14,16 @@ $("#archive-toggle").click(function(){$("#archive-content").removeClass("show-de
 $("#next-post").click(function(){
     var currScroll = $(window).scrollTop() + 5;
 
+    let body = $('html, body');
     if(currScroll < $( ".blog-post:nth-child(2)" ).offset().top){
-        $('html, body').animate({scrollTop: $( ".blog-post:nth-child(2)" ).offset().top},300);
+        body.animate({scrollTop: $( ".blog-post:nth-child(2)" ).offset().top},300);
 
     }
     else if(currScroll < $( ".blog-post:nth-child(3)" ).offset().top){
-        $('html, body').animate({scrollTop: $( ".blog-post:nth-child(3)" ).offset().top},300);
+        body.animate({scrollTop: $( ".blog-post:nth-child(3)" ).offset().top},300);
+    }
+    else {
+        body.animate({scrollTop: $("#footer").offset().top - window.innerHeight },300);
     }
 });
 
