@@ -47,6 +47,10 @@
     url('fonts/noto-sans-v9-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
+/*prevent horizontal scrolling on mobile*/
+@media only screen and (max-device-width: 480px) {
+    body, html { overflow-x:hidden; }
+}
 
 
 .blurred-img {
@@ -99,7 +103,7 @@ li.open:hover {
 
 img.icons {
     width: 100%;
-	max-width: 75px;
+	max-width: 30px;
 }
 
 .headerBackground {
@@ -126,11 +130,6 @@ img.icons {
     background-size: cover;
     transition:height 0.5s;
     margin-bottom: 0px;
-}
-
-#jumbotron-card{
-    background-color: white;
-    padding: 10px;
 }
 
 .container {
@@ -260,6 +259,7 @@ button:hover::before {
 #copyright{
     font-size: 0.8rem;
     text-align:center;
+    margin-bottom: 0px;
 }
 
 #score {
