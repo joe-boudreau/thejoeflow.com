@@ -220,11 +220,17 @@ div#footer{
 
 .blogNav{
     margin: 0;
+    -webkit-animation: pulse-rev 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation: pulse-rev 0.5s;
+    animation-fill-mode: forwards;
 }
 
 .blogNav:hover {
-    -webkit-animation: pulse 1s;
-    animation: pulse 1s;
+    -webkit-animation: pulse 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation: pulse 0.5s;
+    animation-fill-mode: forwards;
 }
 
 button:hover::before {
@@ -292,7 +298,13 @@ button:hover::before {
 }
 
 .archive {
-    padding-left: 0px
+    list-style: none;
+    padding-left: 0px;
+}
+
+#update-date {
+    font-style: italic;
+    text-align: end;
 }
 
 .link::before {

@@ -120,14 +120,9 @@
         transform: scale3d(1, 1, 1);
     }
 
-    50% {
+    to {
         -webkit-transform: scale3d(1.05, 1.05, 1.05);
         transform: scale3d(1.05, 1.05, 1.05);
-    }
-
-    to {
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1);
     }
 }
 
@@ -137,7 +132,19 @@
         transform: scale3d(1, 1, 1);
     }
 
-    50% {
+    to {
+        -webkit-transform: scale3d(1.05, 1.05, 1.05);
+        transform: scale3d(1.05, 1.05, 1.05);
+    }
+}
+
+.pulse {
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+}
+
+@-webkit-keyframes pulse-rev {
+    from {
         -webkit-transform: scale3d(1.05, 1.05, 1.05);
         transform: scale3d(1.05, 1.05, 1.05);
     }
@@ -148,9 +155,21 @@
     }
 }
 
-.pulse {
-    -webkit-animation-name: pulse;
-    animation-name: pulse;
+@keyframes pulse-rev {
+    from {
+        -webkit-transform: scale3d(1.05, 1.05, 1.05);
+        transform: scale3d(1.05, 1.05, 1.05);
+    }
+
+    to {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.pulse-rev {
+    -webkit-animation-name: pulse-rev;
+    animation-name: pulse-rev;
 }
 
 @-webkit-keyframes rubberBand {

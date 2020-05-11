@@ -2,6 +2,7 @@ package com.thejoeflow.blog
 
 import org.springframework.stereotype.Service
 import java.text.DateFormatSymbols
+import java.time.Instant
 import java.time.ZoneId
 import java.util.*
 import java.util.stream.Collectors
@@ -81,6 +82,7 @@ class BlogService(
         }
 
         fun saveBlogPost(blogPost: BlogPost){
+                blogPost.updated = Date.from(Instant.now())
                 postRepository.save(blogPost)
                 reloadBlogCache()
         }

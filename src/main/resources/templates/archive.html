@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <div>
-    <h3>Archive</h3>
+    <h3>All Posts</h3>
     <div id="archive-content">
-        <ul class="archive" style="list-style: none">
+        <ul class="archive">
             <li th:each="year: ${archive}"><a class="year clicky"><img class="archive-selector" src="/images/right.png"/> <span th:text="${year.key}">year</span> <span th:text="'[' + ${yearTotals.get(year.key)} + ']'">[0]</span></a>
                 <ul class="archive-months" style="list-style: none">
                     <li th:each="month: ${year.value}"><a class="month clicky"><img class="archive-selector" src="/images/right.png"/> <span th:text="${month.key}">month</span></a>

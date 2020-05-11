@@ -30,8 +30,13 @@
                     <div class="row">
                         <a class="link" th:href="@{'/blog/post?id=' + ${blogPost.id}}"><h1 th:text="${blogPost.title}">Post Title</h1></a>
                     </div>
-                    <div class="row">
-                        <h4 th:text="${#dates.format(blogPost.published, 'EEEEEEEEEE, MMMMMMMMMMM d yyyy')}">published date</h4>
+                    <div class="row justify-content-between">
+                        <div class="col-lg-4 col-12 px-0">
+                            <h4 th:text="${#dates.format(blogPost.published, 'EEEEEEEEEE, MMMMMMMMMMM d yyyy')}">published date</h4>
+                        </div>
+                        <div class="col-lg-4 col-12 px-0" th:if="${@viewUtils.updatedLater(blogPost)}">
+                            <p id="update-date">Last Updated: <span th:text="${#dates.format(blogPost.updated, 'dd-MM-yyyy')}">updated date</span></p>
+                        </div>
                     </div>
                     <div class="row" th:insert="~{social}" th:with="url=@{${rootUrl} + '/blog/post?id=' + ${blogPost.id}}"></div>
                     <div class="row">
