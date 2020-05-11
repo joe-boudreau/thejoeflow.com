@@ -181,9 +181,8 @@ div#footer{
 .post-content img {
     clear: right;
     float: right;
-    margin-bottom: 1em;
-    margin-left: 1em;
-    max-width: 50%;
+    margin: 1rem;
+    max-width: 40%;
     height: auto;
 }
 
