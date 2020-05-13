@@ -58,6 +58,8 @@ dependencies {
 	compile 'org.springframework.data:spring-data-mongodb'
 	compile 'com.atlassian.commonmark:commonmark:0.11.0'
 	compile 'com.flickr4java:flickr4java:2.18'
+	compile 'com.rometools:rome:1.12.2'
+
 	testImplementation 'org.springframework.security:spring-security-test:5.3.1.RELEASE'
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.1'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.1'

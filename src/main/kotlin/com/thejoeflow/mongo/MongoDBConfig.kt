@@ -1,4 +1,4 @@
-package com.thejoeflow.config
+package com.thejoeflow.mongo
 
 import com.mongodb.client.MongoClient
 import com.mongodb.client.MongoClients
@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 
 @Configuration
-@EnableMongoRepositories(basePackages = ["com.thejoeflow.blog", "com.thejoeflow.config"])
+@EnableMongoRepositories(basePackages = ["com.thejoeflow.mongo"])
 class MongoConfig: AbstractMongoClientConfiguration() {
 
     override fun mongoClient(): MongoClient {

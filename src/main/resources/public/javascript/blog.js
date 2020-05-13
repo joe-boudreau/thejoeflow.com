@@ -1,4 +1,4 @@
-$(".year,.month, #archive-toggle").click(function(){
+$(".year,.month").click(function(){
     $(this).next("ul").slideToggle();
     var selector = $(this).find("img.archive-selector");
     if(selector.attr("src") === "/images/right.png"){
@@ -8,8 +8,6 @@ $(".year,.month, #archive-toggle").click(function(){
         selector.attr("src", "/images/right.png");
     }
 });
-
-$("#archive-toggle").click(function(){$("#archive-content").removeClass("show-desktop")});
 
 $("#next-post").click(function(){
     var currScroll = $(window).scrollTop() + 5;

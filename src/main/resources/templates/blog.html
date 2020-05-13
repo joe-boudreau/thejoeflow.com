@@ -31,10 +31,10 @@
                         <a class="link" th:href="@{'/blog/post?id=' + ${blogPost.id}}"><h1 th:text="${blogPost.title}">Post Title</h1></a>
                     </div>
                     <div class="row justify-content-between">
-                        <div class="col-lg-4 col-12 px-0">
+                        <div class="col-lg-6 col-12 px-0 align-self-center">
                             <h4 th:text="${#dates.format(blogPost.published, 'EEEEEEEEEE, MMMMMMMMMMM d yyyy')}">published date</h4>
                         </div>
-                        <div class="col-lg-4 col-12 px-0" th:if="${@viewUtils.updatedLater(blogPost)}">
+                        <div class="col-lg-6 col-12 px-0 align-self-center" th:if="${@viewUtils.updatedLater(blogPost)}">
                             <p id="update-date">Last Updated: <span th:text="${#dates.format(blogPost.updated, 'dd-MM-yyyy')}">updated date</span></p>
                         </div>
                     </div>
@@ -42,8 +42,8 @@
                     <div class="row">
                         <div class="post-content" th:utext="${blogPost.content}">post content</div>
                     </div>
-                    <div class="row" th:insert="${blogPost.type == T(com.thejoeflow.blog.PostType).FICTION_REVIEW} ? ~{fictionScore} : ~{}"></div>
-                    <div class="row" th:insert="${blogPost.type == T(com.thejoeflow.blog.PostType).NON_FICTION_REVIEW} ? ~{nonFictionScore} : ~{}"></div>
+                    <div class="row" th:insert="${blogPost.type == T(com.thejoeflow.service.PostType).FICTION_REVIEW} ? ~{fictionScore} : ~{}"></div>
+                    <div class="row" th:insert="${blogPost.type == T(com.thejoeflow.service.PostType).NON_FICTION_REVIEW} ? ~{nonFictionScore} : ~{}"></div>
                 </div>
             </tr>
 

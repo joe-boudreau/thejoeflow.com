@@ -1,6 +1,6 @@
 package com.thejoeflow.utils
 
-import com.thejoeflow.blog.BlogPost
+import com.thejoeflow.domain.BlogPost
 import org.springframework.stereotype.Component
 
 @Component

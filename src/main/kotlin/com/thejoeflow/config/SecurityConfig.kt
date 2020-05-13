@@ -1,5 +1,6 @@
 package com.thejoeflow.config
 
+import com.thejoeflow.service.CustomerUserDetailsService
 import org.apache.catalina.connector.Connector
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory

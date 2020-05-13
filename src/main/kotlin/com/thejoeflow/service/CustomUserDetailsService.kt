@@ -1,5 +1,7 @@
-package com.thejoeflow.config
+package com.thejoeflow.service
 
+import com.thejoeflow.mongo.MongoUserDetails
+import com.thejoeflow.mongo.UserRepositoryInterface
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder

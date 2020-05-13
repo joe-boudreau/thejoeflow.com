@@ -1,7 +1,7 @@
-package com.thejoeflow.website
+package com.thejoeflow.controller
 
-import com.thejoeflow.blog.BlogPost
-import com.thejoeflow.blog.BlogService
+import com.thejoeflow.domain.BlogPost
+import com.thejoeflow.service.BlogService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping

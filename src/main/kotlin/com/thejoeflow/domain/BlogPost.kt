@@ -1,4 +1,4 @@
-package com.thejoeflow.blog
+package com.thejoeflow.domain
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -18,7 +18,7 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
                     @JsonProperty("published") val published: Date = Date.from(Instant.now()),
                     @JsonProperty("updated") var updated: Date  = Date.from(Instant.now()),
                     @JsonProperty("type") val type: PostType = PostType.OTHER,
-                    @JsonProperty("score") val score: Score = Score(intArrayOf(0 , 0, 0), "")
+                    @JsonProperty("score") val score: Score = Score(intArrayOf(0, 0, 0), "")
                     ) {
 
     @Transient

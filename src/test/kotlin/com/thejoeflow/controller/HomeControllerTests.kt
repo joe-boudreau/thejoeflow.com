@@ -1,11 +1,11 @@
-package com.thejoeflow.website
+package com.thejoeflow.controller
 
 import com.ninjasquad.springmockk.MockkBean
-import com.thejoeflow.blog.BlogPost
-import com.thejoeflow.blog.BlogService
-import com.thejoeflow.blog.PostType
+import com.thejoeflow.domain.BlogPost
+import com.thejoeflow.service.BlogService
+import com.thejoeflow.domain.PostType
 import com.thejoeflow.config.AppProperties
-import com.thejoeflow.utils.FlickrService
+import com.thejoeflow.service.FlickrService
 import io.mockk.every
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -29,8 +29,8 @@ class HomeControllerTests(@Autowired private val mockMvc: MockMvc) {
     @MockkBean
     private lateinit var flickrService: FlickrService
 
-    private val reviewPosts = arrayOf(BlogPost(id=0))
-    private val otherPosts = arrayOf(BlogPost(id=1))
+    private val reviewPosts = arrayOf(BlogPost(id = 0))
+    private val otherPosts = arrayOf(BlogPost(id = 1))
     private val photoUrls = listOf("url1")
 
     @BeforeEach

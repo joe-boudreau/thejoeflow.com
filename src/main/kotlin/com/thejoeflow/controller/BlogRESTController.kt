@@ -1,7 +1,11 @@
-package com.thejoeflow.blog
+package com.thejoeflow.controller
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import com.thejoeflow.service.BlogService
+import com.thejoeflow.domain.BlogPost
+import com.thejoeflow.domain.PostType
+import com.thejoeflow.domain.Score
 import com.thejoeflow.utils.parseMarkdownToHtml
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -12,7 +16,7 @@ import java.io.InputStreamReader
 
 @RestController
 @ResponseStatus
-class BlogRestEndpoint(private val blogService: BlogService) {
+class BlogRESTController(private val blogService: BlogService) {
 
     @GetMapping("/api/blogpost")
     fun getBlogPosts(@RequestParam(required = false) removeContent: Boolean) : ResponseEntity<List<BlogPost>>{

@@ -1,5 +1,8 @@
-package com.thejoeflow.blog
+package com.thejoeflow.service
 
+import com.thejoeflow.domain.BlogPost
+import com.thejoeflow.domain.PostType
+import com.thejoeflow.mongo.posts.PostRepositoryInterface
 import org.springframework.stereotype.Service
 import java.text.DateFormatSymbols
 import java.time.Instant

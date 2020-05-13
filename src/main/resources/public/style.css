@@ -47,11 +47,14 @@
     url('fonts/noto-sans-v9-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-/*prevent horizontal scrolling on mobile*/
-@media only screen and (max-device-width: 480px) {
+@media only screen and (max-device-width: 992px) {
+    /*prevent horizontal scrolling on mobile*/
     body, html { overflow-x:hidden; }
 }
 
+@media only screen and (min-device-width: 993px) {
+    #update-date { text-align: end; }
+}
 
 .blurred-img {
     position: absolute;
@@ -254,13 +257,6 @@ button:hover::before {
     width: 15px;
 }
 
-/* Desktop*/
-@media screen and (min-width: 768px) {
-    .show-desktop{
-        display: block;
-    }
-}
-
 #copyright{
     font-size: 0.8rem;
     text-align:center;
@@ -304,7 +300,6 @@ button:hover::before {
 
 #update-date {
     font-style: italic;
-    text-align: end;
 }
 
 .link::before {

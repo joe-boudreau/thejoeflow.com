@@ -1,13 +1,12 @@
-package com.thejoeflow.website
+package com.thejoeflow.controller
 
-import com.thejoeflow.blog.BlogPost
-import com.thejoeflow.blog.BlogService
-import com.thejoeflow.blog.PostType
-import com.thejoeflow.utils.FlickrService
+import com.thejoeflow.service.BlogService
+import com.thejoeflow.domain.BlogPost
+import com.thejoeflow.domain.PostType
+import com.thejoeflow.service.FlickrService
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
-import java.util.*
 
 @Controller
 class HomeController(

@@ -1,4 +1,4 @@
-package com.thejoeflow.config
+package com.thejoeflow.mongo
 
 import org.springframework.data.mongodb.repository.MongoRepository
 

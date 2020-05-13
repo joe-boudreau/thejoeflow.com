@@ -1,5 +1,6 @@
-package com.thejoeflow.blog
+package com.thejoeflow.mongo.posts
 
+import com.thejoeflow.domain.BlogPost
 import org.springframework.data.domain.Sort
 import org.springframework.data.domain.Sort.Direction
 import org.springframework.data.domain.Sort.Order

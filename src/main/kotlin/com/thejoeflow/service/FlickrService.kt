@@ -1,4 +1,4 @@
-package com.thejoeflow.utils
+package com.thejoeflow.service
 
 import com.flickr4java.flickr.Flickr
 import com.flickr4java.flickr.REST

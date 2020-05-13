@@ -1,4 +1,4 @@
-package com.thejoeflow.config
+package com.thejoeflow.mongo
 
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils

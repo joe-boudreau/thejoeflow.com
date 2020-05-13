@@ -1,10 +1,10 @@
-package com.thejoeflow.website
+package com.thejoeflow.controller
 
 import com.ninjasquad.springmockk.MockkBean
-import com.thejoeflow.blog.BlogPost
-import com.thejoeflow.blog.BlogService
+import com.thejoeflow.domain.BlogPost
+import com.thejoeflow.service.BlogService
 import com.thejoeflow.config.AppProperties
-import com.thejoeflow.utils.FlickrService
+import com.thejoeflow.service.FlickrService
 import io.mockk.every
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
