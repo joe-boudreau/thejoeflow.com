@@ -17,9 +17,7 @@ fun main(args: Array<String>) {
 }
 
 @Configuration
-class Resources(appProperties: AppProperties) : WebMvcConfigurer {
-
-    val appProperties = appProperties
+class Resources(val appProperties: AppProperties) : WebMvcConfigurer {
 
     override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
         registry.addResourceHandler("/covers/**")
