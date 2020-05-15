@@ -1,16 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<div id="archive-content">
-    <ul class="archive">
-        <li th:each="year: ${archive}"><a class="year clicky"><img class="archive-selector" src="/images/right.png"/> <span th:text="${year.key}">year</span> <span th:text="'[' + ${yearTotals.get(year.key)} + ']'">[0]</span></a>
-            <ul class="archive-months" style="list-style: none">
-                <li th:each="month: ${year.value}"><a class="month clicky"><img class="archive-selector" src="/images/right.png"/> <span th:text="${month.key}">month</span></a>
-                    <ul class="archive-posts">
-                        <li th:each="post: ${month.value}"><a th:href="@{'/blog/post?id=' + ${post.id}}"><span th:text="${post.title}">title</span></a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+    <title>The Joe Flow</title>
+</head>
+<body>
+
+<div id="navbar" th:insert="~{navbar}"/>
+
+<div class="container-fluid odd mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mx-auto" style="text-align:center;">Archive</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="container" style="margin:0 300px;">
+                <tr th:each="blogPost : ${posts}">
+                        <div class="row clicky archive-post justify-content-between" th:attr="data-link=@{'/blog/post?id=' + ${blogPost.id}}">
+                            <div class="col-8">
+                                <h3 th:text="${blogPost.title}">Post Title</h3>
+                                <p style="font-size: smaller;font-style: italic" th:text="${#dates.format(blogPost.published, 'EEEEEEEEEE, MMMMMMMMMMM d yyyy')}">
+                                    Published Date
+                                </p>
+                                <p th:text="${blogPost.getFirstNChars(400)}">Quick Summary</p>
+                            </div>
+                            <div class="col-3 py-3">
+                                <img class="mx-auto d-block" style="height:150px;" th:src="${blogPost.firstImage}" alt="Blog Post Image">
+                            </div>
+                        </div>
+                    <hr>
+                </tr>
+            </div>
+        </div>
+    </div>
 </div>
+<div th:insert="~{footer}"/>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/javascript/archive.js"></script>
+<script src="/javascript/common.js"></script>
+</body>
 </html>

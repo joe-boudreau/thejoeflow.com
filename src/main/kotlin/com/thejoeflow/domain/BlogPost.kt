@@ -24,16 +24,16 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
     @Transient
     private val parsedHtml = Jsoup.parse(content)
     @Transient
-    private val defaultImage = "images/default_cover.png"
+    private val defaultImage = "/images/default_cover.png"
 
     @Transient
     val firstImage = parsedHtml.selectFirst("img")?.attr("src") ?: defaultImage
     @Transient
-    val first150Chars = getFirstChars()
+    val first150Chars = getFirstNChars(150)
 
-    private fun getFirstChars(): String {
+    fun getFirstNChars(n: Int): String {
         //Get the content of the first paragraph in the post that isn't part of a quote
-        val previewText = parsedHtml.selectFirst("p:not(blockquote p)")?.text()?.take(150)
+        val previewText = parsedHtml.selectFirst("p:not(blockquote p)")?.text()?.take(n)
         return "$previewText..."
     }
 }
