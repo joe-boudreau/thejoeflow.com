@@ -21,7 +21,7 @@ class BlogService(
 
         var archiveMap = generateArchive()
 
-        private final fun generateArchive(): Map<String, Map<String, List<BlogPost>>>{
+        private final fun generateArchive(): Map<String, Map<String, List<BlogPost>>> {
 
                 val archive = LinkedHashMap<String, MutableMap<String, MutableList<BlogPost>>>()
 
@@ -45,11 +45,11 @@ class BlogService(
                 return archive
         }
 
-        fun getArchive(): Map<String, Map<String, List<BlogPost>>>{
+        fun getArchive(): Map<String, Map<String, List<BlogPost>>> {
                 return archiveMap
         }
 
-        fun getYearTotals(): Map<String, Int>{
+        fun getYearTotals(): Map<String, Int> {
                 return archiveMap.entries
                                  .stream()
                                  .collect(Collectors.toMap(
@@ -62,7 +62,7 @@ class BlogService(
                 return arrayOf(localDate.year.toString(), getMonthName(localDate.monthValue))
         }
 
-        fun getMonthName(number: Int): String{
+        fun getMonthName(number: Int): String {
                 return DateFormatSymbols().months[number-1]
         }
 
@@ -73,24 +73,24 @@ class BlogService(
                                         .orElseThrow { Exception("No blog found!")}
         }
 
-        fun getBlogPosts(amount: Int, offset: Int): Array<BlogPost>{
+        fun getBlogPosts(amount: Int, offset: Int): Array<BlogPost> {
                 val available = (blogPostsOrdered.size - offset).coerceAtMost(amount)
                 return Array(available) { i -> blogPostsOrdered[i + offset]}
         }
 
-        fun getBlogPosts(amount: Int, offset: Int, vararg types: PostType): Array<BlogPost>{
+        fun getBlogPosts(amount: Int, offset: Int, vararg types: PostType): Array<BlogPost> {
                 val blogPostsOfType = blogPostsOrdered.filter { bp -> types.contains(bp.type) }
                 val available = blogPostsOfType.size.coerceAtMost(amount)
                 return Array(available) { i -> blogPostsOfType[i + offset]}
         }
 
-        fun saveBlogPost(blogPost: BlogPost){
+        fun saveBlogPost(blogPost: BlogPost) {
                 blogPost.updated = Date.from(Instant.now())
                 postRepository.save(blogPost)
                 reloadBlogCache()
         }
 
-        fun deleteBlogPost(id: Long){
+        fun deleteBlogPost(id: Long) {
                 postRepository.deleteById(id)
                 reloadBlogCache()
         }

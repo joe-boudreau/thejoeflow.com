@@ -20,10 +20,16 @@
     <div class="row">
         <div class="d-none d-lg-block col-lg-3 sidebar mr-3 pl-3 archive-col">
             <div class="container sticky-top">
+                <div class="row">
+                    <h3>All Posts</h3>
+                </div>
                 <div class="row" id="archiveRow" th:insert="~{archive}"/>
                 <div class="row">
                     <h3>Subscribe</h3>
-
+                </div>
+                <div class="row">
+                    <img style="max-width:20px" src="/icons/rss.png">
+                    <a href="/synd/rss">&nbsp;RSS</a><span>&nbsp;/&nbsp;</span><a href="/synd/atom">Atom</a>
                 </div>
             </div>
         </div>

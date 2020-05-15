@@ -2,10 +2,11 @@ package com.thejoeflow.controller
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.thejoeflow.service.BlogService
 import com.thejoeflow.domain.BlogPost
 import com.thejoeflow.domain.PostType
 import com.thejoeflow.domain.Score
+import com.thejoeflow.service.BlogService
+import com.thejoeflow.service.synd.SyndicationService
 import com.thejoeflow.utils.parseMarkdownToHtml
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -16,7 +17,10 @@ import java.io.InputStreamReader
 
 @RestController
 @ResponseStatus
-class BlogRESTController(private val blogService: BlogService) {
+class BlogRESTController(
+        private val blogService: BlogService,
+        private val syndicationService: SyndicationService
+) {
 
     @GetMapping("/api/blogpost")
     fun getBlogPosts(@RequestParam(required = false) removeContent: Boolean) : ResponseEntity<List<BlogPost>>{
@@ -44,6 +48,7 @@ class BlogRESTController(private val blogService: BlogService) {
             blogPostToSave = blogPost.copy(content = parseMarkdownToHtml(blogPost.content))
         }
         blogService.saveBlogPost(blogPostToSave)
+        syndicationService.reloadFeeds()
         return ResponseEntity(HttpStatus.CREATED)
     }
 
@@ -70,6 +75,7 @@ class BlogRESTController(private val blogService: BlogService) {
             val score = jacksonObjectMapper().readValue<Score>(scoreJSON)
             blogService.saveBlogPost(BlogPost(title = title, type = type, content = stringContent, score = score))
         }
+        syndicationService.reloadFeeds()
         return ResponseEntity(HttpStatus.CREATED)
     }
 
@@ -82,6 +88,7 @@ class BlogRESTController(private val blogService: BlogService) {
             blogPostToSave = blogPostToSave.copy(content = parseMarkdownToHtml(blogPost.content))
         }
         blogService.saveBlogPost(blogPostToSave)
+        syndicationService.reloadFeeds()
         return ResponseEntity(HttpStatus.ACCEPTED)
     }
 

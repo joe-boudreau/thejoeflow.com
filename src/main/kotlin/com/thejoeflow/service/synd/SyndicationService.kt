@@ -17,10 +17,15 @@ enum class FeedType(val value: String) {
 @Service
 class SyndicationService(@Value("\${server.port}") private val serverPortHttps: Int = 0,
                          @Value("\${server.hostname}") private val serverHostname: String = "localhost",
-                         val blogService: BlogService) {
+                         private val blogService: BlogService) {
 
     var rssChannel = createWireFeed(FeedType.RSS) as Channel
     var atomFeed = createWireFeed(FeedType.ATOM) as Feed
+
+    fun reloadFeeds() {
+        rssChannel = createWireFeed(FeedType.RSS) as Channel
+        atomFeed = createWireFeed(FeedType.ATOM) as Feed
+    }
 
     private fun createWireFeed(type: FeedType): WireFeed? {
 
