@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="row" th:insert="~{social}" th:with="url=@{${rootUrl} + '/blog/post?id=' + ${blogPost.id}}"></div>
-            <div class="row">
+            <div class="row px-2">
                 <div class="post-content" th:utext="${blogPost.content}">post content</div>
             </div>
             <div class="row" th:insert="${blogPost.type == T(com.thejoeflow.domain.PostType).FICTION_REVIEW} ? ~{fictionScore} : ~{}"></div>

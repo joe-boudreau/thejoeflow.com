@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Armata|Fjalla+One" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/animate.css">
-    <link href="/sharif<hr>f-3.2.1/shariff.complete.css" rel="stylesheet">
+    <link href="/shariff-3.2.1/shariff.complete.css" rel="stylesheet">
     <title>The Joe Flow</title>
 </head>
 <body>
@@ -36,7 +36,7 @@
 
         <div id="posts" class="col-lg-6 col-12">
             <tr th:each="blogPost : ${posts}">
-                <div class="blog-post pb-5 px-3">
+                <div class="blog-post pb-5 px-3 mb-5">
                     <div class="row">
                         <a class="link" th:href="@{'/blog/post?id=' + ${blogPost.id}}"><h1 th:text="${blogPost.title}">Post Title</h1></a>
                     </div>
@@ -49,11 +49,18 @@
                         </div>
                     </div>
                     <div class="row" th:insert="~{social}" th:with="url=@{${rootUrl} + '/blog/post?id=' + ${blogPost.id}}"></div>
-                    <div class="row">
+                    <div class="row px-2">
                         <div class="post-content" th:utext="${blogPost.content}">post content</div>
                     </div>
                     <div class="row" th:insert="${blogPost.type == T(com.thejoeflow.domain.PostType).FICTION_REVIEW} ? ~{fictionScore} : ~{}"></div>
                     <div class="row" th:insert="${blogPost.type == T(com.thejoeflow.domain.PostType).NON_FICTION_REVIEW} ? ~{nonFictionScore} : ~{}"></div>
+                    <div class="row">
+                        <div class="d-inline-flex justify-content-center mx-auto">
+                            <a class="link" th:href="@{'/blog/post?id=' + ${blogPost.id} + '#disqus_thread'}">
+                                <h3>Comments</h3>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </tr>
 

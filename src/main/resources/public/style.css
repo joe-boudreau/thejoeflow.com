@@ -180,6 +180,7 @@ div#footer{
 
 .post-content {
     padding-top: 2%;
+    font-size: large;
 }
 
 .post-content img {
@@ -199,7 +200,7 @@ div#footer{
     margin: 3% 7%;
     text-align: justify;
     background-color: var(--jf-beige);
-    padding: 1%;
+    padding: 1% 3%;
     font-style: normal;
 }
 

@@ -22,17 +22,17 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="container" style="margin:0 300px;">
+            <div class="container mx-auto" style="max-width:900px;">
                 <tr th:each="blogPost : ${posts}">
-                        <div class="row clicky archive-post justify-content-between" th:attr="data-link=@{'/blog/post?id=' + ${blogPost.id}}">
-                            <div class="col-8">
+                        <div class="row mx-auto clicky archive-post" th:attr="data-link=@{'/blog/post?id=' + ${blogPost.id}}">
+                            <div class="col-9">
                                 <h3 th:text="${blogPost.title}">Post Title</h3>
                                 <p style="font-size: smaller;font-style: italic" th:text="${#dates.format(blogPost.published, 'EEEEEEEEEE, MMMMMMMMMMM d yyyy')}">
                                     Published Date
                                 </p>
-                                <p th:text="${blogPost.getFirstNChars(400)}">Quick Summary</p>
+                                <p class="d-none d-md-block" th:text="${blogPost.getFirstNChars(400)}">Quick Summary</p>
                             </div>
-                            <div class="col-3 py-3">
+                            <div class="col-3 py-3 px-0">
                                 <img class="mx-auto d-block" style="height:150px;" th:src="${blogPost.firstImage}" alt="Blog Post Image">
                             </div>
                         </div>
