@@ -110,6 +110,15 @@ img.icons {
 	max-width: 30px;
 }
 
+.rss-icon {
+    max-width: 20px;
+    height: auto;
+}
+
+#connect {
+    margin-bottom: 0;
+}
+
 .headerBackground {
 	background-position: center;
 }
