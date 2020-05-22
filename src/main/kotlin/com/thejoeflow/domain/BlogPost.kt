@@ -18,18 +18,23 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
                     @JsonProperty("published") val published: Date = Date.from(Instant.now()),
                     @JsonProperty("updated") var updated: Date  = Date.from(Instant.now()),
                     @JsonProperty("type") val type: PostType = PostType.OTHER,
-                    @JsonProperty("score") val score: Score = Score(intArrayOf(0, 0, 0), "")
-                    ) {
+                    @JsonProperty("score") val score: Score? = null,
+                    @JsonProperty("background") val background: String? = null
+) {
 
     @Transient
     private val parsedHtml = Jsoup.parse(content)
     @Transient
-    private val defaultImage = "/images/default_cover.png"
+    private val defaultCover = "/images/default_cover.png"
+    @Transient
+    private val defaultBackground = "/images/postBackgroundImg.jpg"
 
     @Transient
-    val firstImage = parsedHtml.selectFirst("img")?.attr("src") ?: defaultImage
+    val firstImage = parsedHtml.selectFirst("img")?.attr("src") ?: defaultCover
     @Transient
     val first150Chars = getFirstNChars(150)
+    @Transient
+    val backgroundImg = if (background != null) "/photos/$background" else defaultBackground
 
     fun getFirstNChars(n: Int): String {
         //Get the content of the first paragraph in the post that isn't part of a quote

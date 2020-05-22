@@ -51,10 +51,13 @@
 @media only screen and (max-device-width: 992px) {
     /*prevent horizontal scrolling on mobile*/
     body, html { overflow-x:hidden; }
+    #post-jumbotron-info { margin: 45% 15%; }
 }
 
 @media only screen and (min-device-width: 993px) {
     #update-date { text-align: end; }
+    .post-content { font-size: large; }
+    #post-jumbotron-info { margin: 10% 20%; }
 }
 
 .blurred-img {
@@ -111,8 +114,7 @@ img.icons {
 }
 
 .rss-icon {
-    max-width: 20px;
-    height: auto;
+    height: 1.5rem;
 }
 
 #connect {
@@ -174,9 +176,9 @@ img.icons {
     color: black;
 }
 
-div#footer{
+div#footer {
     background-color: var(--jf-light);
-    padding:0px auto;
+    padding: 0px auto;
 }
 
 
@@ -186,10 +188,26 @@ div#footer{
     text-align: center;
     color: black !important;
 }
+#post-jumbotron {
+    background-color: var(--jf-green);
+}
+
+#post-jumbotron-info {
+    text-align: center;
+}
+
+#post-jumbotron-info-content {
+    display: inline-block;
+    background-color: rgba(255,255,255,0.25);
+    padding: 2%;
+}
+
+#post-jumbotron-info-content h1 {
+    font-weight: bold;
+}
 
 .post-content {
     padding-top: 2%;
-    font-size: large;
 }
 
 .post-content img {

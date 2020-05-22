@@ -2,6 +2,7 @@ package com.thejoeflow.controller
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import com.thejoeflow.config.AppProperties
 import com.thejoeflow.domain.BlogPost
 import com.thejoeflow.domain.PostType
 import com.thejoeflow.domain.Score
@@ -13,13 +14,15 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import java.io.InputStreamReader
+import java.nio.file.Path
 
 
 @RestController
 @ResponseStatus
 class BlogRESTController(
         private val blogService: BlogService,
-        private val syndicationService: SyndicationService
+        private val syndicationService: SyndicationService,
+        private val appProperties: AppProperties
 ) {
 
     @GetMapping("/api/blogpost")
@@ -56,29 +59,39 @@ class BlogRESTController(
     fun saveNewBlogPost(@RequestParam title: String,
                         @RequestParam type: PostType,
                         @RequestParam content: MultipartFile,
+                        @RequestParam(required = false) md: Boolean,
                         @RequestParam("score") scoreJSON: String?,
-                        @RequestParam(required = false) md: Boolean): ResponseEntity<String>{
+                        @RequestParam background: MultipartFile?): ResponseEntity<String>{
 
 
+        // Post content
         var stringContent = InputStreamReader(content.inputStream).use(InputStreamReader::readText)
         if (md){
             stringContent = parseMarkdownToHtml(stringContent)
         }
 
-        if (type == PostType.OTHER){
-            blogService.saveBlogPost(BlogPost(title = title, type = type, content = stringContent))
-        }
-        else{
+        // Score - if it's a book review
+        var score: Score? = null
+        if (type != PostType.OTHER) {
             if (scoreJSON == null){
-                return ResponseEntity(HttpStatus.BAD_REQUEST)
+                return ResponseEntity("Book review posts require a Score parameter", HttpStatus.BAD_REQUEST)
             }
-            val score = jacksonObjectMapper().readValue<Score>(scoreJSON)
-            blogService.saveBlogPost(BlogPost(title = title, type = type, content = stringContent, score = score))
+            score = jacksonObjectMapper().readValue<Score>(scoreJSON)
         }
+
+        // Post background image
+        val backgroundFilename: String? = if (background != null) savePhoto(background, title) else null
+
+        blogService.saveBlogPost(BlogPost(
+                title = title,
+                type = type,
+                content = stringContent,
+                score = score,
+                background = backgroundFilename))
+
         syndicationService.reloadFeeds()
         return ResponseEntity(HttpStatus.CREATED)
     }
-
 
 
     @PutMapping("/api/blogpost/{id}")
@@ -92,9 +105,26 @@ class BlogRESTController(
         return ResponseEntity(HttpStatus.ACCEPTED)
     }
 
+    @PutMapping("/api/blogpost/{id}", consumes = ["multipart/form-data"])
+    fun updateBlogPostBackground(@PathVariable id: Long, @RequestParam background: MultipartFile): ResponseEntity<String>{
+        val post = blogService.getPostById(id) ?: return ResponseEntity("Post with ID: $id not found", HttpStatus.NOT_FOUND)
+        val updated = post.copy(background = savePhoto(background, post.title))
+        blogService.saveBlogPost(updated)
+        syndicationService.reloadFeeds()
+        return ResponseEntity(HttpStatus.ACCEPTED)
+    }
+
     @DeleteMapping("/api/blogpost/{id}")
     fun deleteBlogPost( @PathVariable id: Long): ResponseEntity<String>{
         blogService.deleteBlogPost(id)
         return ResponseEntity(HttpStatus.OK)
+    }
+
+    private fun savePhoto(background: MultipartFile, title: String): String {
+        val backgroundFilename = title.hashCode().toString()
+        // Save the file
+        val outputFile = Path.of(appProperties.photoFolder, backgroundFilename).toFile()
+        outputFile.outputStream().use { background.inputStream.copyTo(it) }
+        return backgroundFilename
     }
 }

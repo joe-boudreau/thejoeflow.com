@@ -14,44 +14,33 @@
 </head>
 <body>
 <div id="navbar" th:insert="~{navbar}"></div>
-
-<div class="container-fluid odd">
-    <div class="row">
-        <div class="d-none d-lg-block col-lg-3 sidebar mr-3 pl-3 archive-col">
-            <div class="container sticky-top">
-                <div class="row">
-                    <h3>All Posts</h3>
-                </div>
-                <div class="row" id="archiveRow" th:insert="~{sidebar_archive}"/>
-                <div class="row">
-                    <h3>Subscribe</h3>
-                </div>
-                <div class="row">
-                    <img class="rss-icon" src="/icons/rss.png">
-                    <a href="/synd/rss">&nbsp;RSS</a><span>&nbsp;/&nbsp;</span><a href="/synd/atom">Atom</a>
-                </div>
+<div id="post-jumbotron" class="jumbotron-fluid" th:style="'background:url('+${blogPost.backgroundImg}+') center center/cover no-repeat fixed;'">
+    <div class="row align-items-center justify-content-center">
+        <div id="post-jumbotron-info" class="col align-self-center">
+            <div id="post-jumbotron-info-content">
+                <h1 th:text="${blogPost.title}">Post Title</h1>
+                <h4 th:text="${#dates.format(blogPost.published, 'EEEEEEEEEE, MMMMMMMMMMM d yyyy')}">published date</h4>
             </div>
         </div>
-
-        <div class="blog-post col-lg-6 col-12 px-4">
-            <div class="row">
-                <h1 th:text="${blogPost.title}">Post Title</h1>
-            </div>
-            <div class="row justify-content-between">
-                <div class="col-lg-6 col-12 px-0">
-                    <h4 th:text="${#dates.format(blogPost.published, 'EEEEEEEEEE, MMMMMMMMMMM d yyyy')}">published date</h4>
-                </div>
-                <div class="col-lg-6 col-12 px-0" th:if="${@viewUtils.updatedLater(blogPost)}">
-                    <p id="update-date">Last Updated: <span th:text="${#dates.format(blogPost.updated, 'dd-MM-yyyy')}">updated date</span></p>
-                </div>
-            </div>
-            <div class="row" th:insert="~{social}" th:with="url=@{${rootUrl} + '/blog/post?id=' + ${blogPost.id}}"></div>
+    </div>
+</div>
+<div class="container-fluid mt-3">
+    <div class="row justify-content-between">
+        <div class="col-lg-6 col-12 px-1" th:insert="~{social}" th:with="url=@{${rootUrl} + '/blog/post?id=' + ${blogPost.id}}"></div>
+        <div class="col-lg-6 col-12 px-1" th:if="${@viewUtils.updatedLater(blogPost)}">
+            <p id="update-date">Last Updated: <span th:text="${#dates.format(blogPost.updated, 'dd-MM-yyyy')}">updated date</span></p>
+        </div>
+    </div>
+</div>
+<div class="container odd mx-auto" style="max-width:800px;">
+    <div class="row">
+        <div class="blog-post col-12 px-4">
             <div class="row px-2">
                 <div class="post-content" th:utext="${blogPost.content}">post content</div>
             </div>
-            <div class="row" th:insert="${blogPost.type == T(com.thejoeflow.domain.PostType).FICTION_REVIEW} ? ~{fictionScore} : ~{}"></div>
-            <div class="row" th:insert="${blogPost.type == T(com.thejoeflow.domain.PostType).NON_FICTION_REVIEW} ? ~{nonFictionScore} : ~{}"></div>
-
+            <div class="row mb-5" th:insert="${blogPost.type == T(com.thejoeflow.domain.PostType).FICTION_REVIEW} ? ~{fictionScore} : ~{}"></div>
+            <div class="row mb-5" th:insert="${blogPost.type == T(com.thejoeflow.domain.PostType).NON_FICTION_REVIEW} ? ~{nonFictionScore} : ~{}"></div>
+            <hr>
             <div id="disqus_thread" th:attr="data-url=@{${rootUrl} + '/blog/post?id=' + ${blogPost.id}}, data-page-id=${blogPost.id}"></div>
             <script>
                 var disqus_config = function () {
