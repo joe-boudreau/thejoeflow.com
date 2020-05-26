@@ -44,8 +44,8 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
 }
 
 @Document
-data class Score(@JsonProperty("scores") val scores : IntArray,
-            @JsonProperty("sandwich") var sandwich : String)
+data class Score(@JsonProperty("scores") val scores : IntArray = intArrayOf(0, 0, 0),
+            @JsonProperty("sandwich") var sandwich : String = "")
 
 enum class PostType {
     //TODO: Remove these deprecated bitches
