@@ -48,16 +48,19 @@
     url('fonts/noto-sans-v9-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
+/*Mobile specific rules*/
 @media only screen and (max-device-width: 992px) {
     /*prevent horizontal scrolling on mobile*/
     body, html { overflow-x:hidden; }
     #post-jumbotron-info { margin: 45% 15%; }
 }
 
+/*Desktop specific rules*/
 @media only screen and (min-device-width: 993px) {
     #update-date { text-align: end; }
     .post-content { font-size: large; }
     #post-jumbotron-info { margin: 10% 20%; }
+    #post-jumbotron { background-attachment: fixed; }
 }
 
 .blurred-img {
@@ -178,7 +181,6 @@ img.icons {
 
 div#footer {
     background-color: var(--jf-light);
-    padding: 0px auto;
 }
 
 
@@ -188,8 +190,11 @@ div#footer {
     text-align: center;
     color: black !important;
 }
+
 #post-jumbotron {
-    background-color: var(--jf-green);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #post-jumbotron-info {
