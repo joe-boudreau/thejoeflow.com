@@ -38,31 +38,30 @@
                 </select>
                 <h3>Content:</h3>
                 <textarea style="width:100%;height:500px;" th:field="*{content}"></textarea>
-                <h3>Background:</h3>
-                <img style="height:100px;" th:src="${post.backgroundImg}">
-                <div th:if="${post.score != null}">
-                    <h3>Imagery / Value :</h3>
-                    <input th:field="*{score.scores[0]}" type="number"/>
-                    <h3>Entertainment / Interest :</h3>
-                    <input th:field="*{score.scores[1]}" type="number"/>
-                    <h3>Writing:</h3>
-                    <input th:field="*{score.scores[2]}" type="number"/>
-
-                    <h3>Sandwich Analogy:</h3>
-                    <input th:field="*{score.sandwich}" type="text"/>
-                </div>
+                <h3>Imagery / Value :</h3>
+                <input th:field="*{score.scores[0]}" type="number"/>
+                <h3>Entertainment / Interest :</h3>
+                <input th:field="*{score.scores[1]}" type="number"/>
+                <h3>Writing:</h3>
+                <input th:field="*{score.scores[2]}" type="number"/>
+                <h3>Sandwich Analogy:</h3>
+                <input th:field="*{score.sandwich}" type="text"/>
                 <h3>id:</h3>
                 <input th:field="*{id}" type="text" readonly/>
                 <h3>Published:</h3>
                 <input th:field="*{published}" type="text" readonly/>
                 <h3>Updated:</h3>
                 <input th:field="*{updated}" type="text" readonly/>
+                <h3>Background Image File:</h3>
+                <input th:field="*{background}" type="text" readonly/>
 
 
                 <input type="submit" value="Submit!"/>
             </form>
 
             <form id="bgUploadForm" method="post" th:action="@{'/editPost/' + ${post.id} + '/background'}" enctype="multipart/form-data">
+                <h3>Background:</h3>
+                <img style="height:100px;" th:src="${post.backgroundImg}">
                 <div class="form-group">
                     <input type="file" name="background" class="form-control-file">
                 </div>

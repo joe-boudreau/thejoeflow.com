@@ -71,16 +71,19 @@ class BlogRESTController(
         }
 
         // Score - if it's a book review
-        var score: Score? = null
+        var score =
         if (type != PostType.OTHER) {
             if (scoreJSON == null){
                 return ResponseEntity("Book review posts require a Score parameter", HttpStatus.BAD_REQUEST)
             }
-            score = jacksonObjectMapper().readValue<Score>(scoreJSON)
+            jacksonObjectMapper().readValue<Score>(scoreJSON)
+        }
+        else {
+            Score()
         }
 
         // Post background image
-        val backgroundFilename: String? = if (background != null) savePhoto(background, title) else null
+        val backgroundFilename: String = if (background != null) savePhoto(background, title) else ""
 
         blogService.saveBlogPost(BlogPost(
                 title = title,

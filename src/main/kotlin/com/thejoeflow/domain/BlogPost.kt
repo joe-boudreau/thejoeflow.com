@@ -6,6 +6,7 @@ import org.jsoup.Jsoup
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.Transient
 import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.util.StringUtils
 import java.time.Instant
 import java.util.*
 
@@ -18,8 +19,8 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
                     @JsonProperty("published") val published: Date = Date.from(Instant.now()),
                     @JsonProperty("updated") var updated: Date  = Date.from(Instant.now()),
                     @JsonProperty("type") val type: PostType = PostType.OTHER,
-                    @JsonProperty("score") val score: Score? = null,
-                    @JsonProperty("background") val background: String? = null
+                    @JsonProperty("score") val score: Score = Score(),
+                    @JsonProperty("background") val background: String = ""
 ) {
 
     @Transient
@@ -34,7 +35,7 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
     @Transient
     val first150Chars = getFirstNChars(150)
     @Transient
-    val backgroundImg = if (background != null) "/photos/$background" else defaultBackground
+    val backgroundImg = if (StringUtils.isEmpty(background)) defaultBackground else "/photos/$background"
 
     fun getFirstNChars(n: Int): String {
         //Get the content of the first paragraph in the post that isn't part of a quote
