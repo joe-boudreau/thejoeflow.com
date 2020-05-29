@@ -80,40 +80,6 @@
 		</tr>
 	</div>
 </div>
-
-<div class="container-fluid odd">
-	<div class="row">
-		<div class="col-md-6 col-sm-12">
-			<h1 id="Photos">Photos</h1>
-			<p>All photos on the site are courtesy of Paul Boudreau's fantastic Flickr.<br><a class="link" href="https://www.flickr.com/photos/41474913@N05/">Check it out!</a></p>
-		</div>
-		<div class="col-md-6 col-sm-12">
-			<div id="carouselExampleIndicators" class="carousel slide mx-auto" data-ride="carousel" style="width:70%;">
-				<ol class="carousel-indicators">
-					<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-				</ol>
-				<div class="carousel-inner">
-					<tr th:each="url,iter : ${dadFlickrPhotos}">
-						<div class="carousel-item" th:classappend="${iter.index == 0} ? 'active' : ''">
-							<img class="carousel-image d-block w-100" th:src=${url}>
-						</div>
-					</tr>
-				</div>
-				<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
-			</div>
-		</div>
-	</div>
-</div>
-
 <div th:insert="~{footer}"/>
 
 <!-- Optional JavaScript -->
