@@ -215,12 +215,20 @@ div#footer {
     padding-top: 2%;
 }
 
-.post-content img {
+.post-content p > img {
     clear: right;
     float: right;
     margin: 1rem;
     max-width: 40%;
     height: auto;
+}
+
+.post-content figure img {
+    max-width: 100%;
+}
+.post-content figure figcaption {
+    text-align: center;
+    font-size: small;
 }
 
 .post-content h2, .post-content h3, .post-content h4{
