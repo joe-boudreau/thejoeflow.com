@@ -31,7 +31,12 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
     private val defaultBackground = "/images/postBackgroundImg.jpg"
 
     @Transient
-    val firstImage = parsedHtml.selectFirst("img")?.attr("src") ?: defaultCover
+    val firstImage = if (type != PostType.OTHER) {
+        parsedHtml.selectFirst("img")?.attr("src") ?: defaultCover
+    } else{
+        defaultCover
+    }
+
     @Transient
     val first150Chars = getFirstNChars(150)
     @Transient
@@ -49,6 +54,5 @@ data class Score(@JsonProperty("scores") val scores : IntArray = intArrayOf(0, 0
             @JsonProperty("sandwich") var sandwich : String = "")
 
 enum class PostType {
-    //TODO: Remove these deprecated bitches
-    BOOKREVIEW, POST, FICTION_REVIEW, NON_FICTION_REVIEW,  OTHER
+    FICTION_REVIEW, NON_FICTION_REVIEW,  OTHER
 }
