@@ -85,6 +85,10 @@ div, p, h3, h4, a, li, li.nav-h2 a {
 	font-family: 'Noto Sans', sans-serif
 }
 
+.post-content, .post-content p {
+    font-family: Georgia, serif;
+}
+
 a{
     color: var(--jf-blue);
 }
@@ -215,7 +219,7 @@ div#footer {
     padding-top: 2%;
 }
 
-.post-content p > img {
+.post-content p > img, .post-content > img {
     clear: right;
     float: right;
     margin: 1rem;
@@ -249,11 +253,12 @@ div#footer {
 }
 
 .post-content blockquote p:last-child{
+    color: black;
     font-size: smaller;
     font-style: italic;
 }
 
-.post-content blockquote p:first-child{
+.post-content blockquote p{
     color: var(--jf-green);
     font-size: inherit;
     font-style: normal;
@@ -319,10 +324,14 @@ button:hover::before {
     line-height: 1;
 }
 
-.score-divider {
-    width: 1px;
-    margin: 10px 0;
-    background: var(--jf-dark);
+#score-type-col {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#score-type {
+    color: var(--jf-blue);
+    align-self: flex-end;
 }
 
 .link {
