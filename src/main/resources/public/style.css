@@ -85,7 +85,7 @@ div, p, h3, h4, a, li, li.nav-h2 a {
 	font-family: 'Noto Sans', sans-serif
 }
 
-.post-content, .post-content p {
+.post-content, .post-content p, .post-content a, .post-content b, .post-content i, .post-content li {
     font-family: Georgia, serif;
 }
 
@@ -207,12 +207,19 @@ div#footer {
 
 #post-jumbotron-info-content {
     display: inline-block;
-    background-color: rgba(255,255,255,0.5);
     padding: 2%;
 }
 
 #post-jumbotron-info-content h1 {
     font-weight: bold;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
+    letter-spacing: 1px;
+    color: var(--jf-light);
+}
+
+#post-jumbotron-info-content h4 {
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
+    color: var(--jf-light);
 }
 
 .post-content {
@@ -248,17 +255,14 @@ div#footer {
     font-style: normal;
 }
 
-.post-content blockquote p{
-    margin: auto;
-}
-
 .post-content blockquote p:last-child{
     color: black;
     font-size: smaller;
     font-style: italic;
 }
 
-.post-content blockquote p{
+.post-content blockquote p, .post-content blockquote p:first-child{
+    margin: auto;
     color: var(--jf-green);
     font-size: inherit;
     font-style: normal;
