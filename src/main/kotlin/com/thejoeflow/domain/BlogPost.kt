@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.util.StringUtils
 import java.time.Instant
 import java.util.*
+import kotlin.math.roundToInt
 
 
 @Document
@@ -35,6 +36,16 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
         parsedHtml.selectFirst("img")?.attr("src") ?: defaultCover
     } else{
         defaultCover
+    }
+
+    @Transient
+    val numberOfWholeStars = getStars().first
+    @Transient
+    val numberOfHalfStars = getStars().second
+
+    private fun getStars(): Pair<Int, Int> {
+        val r2 = (score.scores.sum()/21.0 * 5 * 2).roundToInt()
+        return Pair(r2/2, r2%2)
     }
 
     @Transient

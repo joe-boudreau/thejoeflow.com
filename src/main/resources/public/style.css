@@ -61,6 +61,8 @@
     .post-content { font-size: large; }
     #post-jumbotron-info { margin: 10% 20%; }
     #post-jumbotron { background-attachment: fixed; }
+    #score-type-col { justify-content: flex-end; }
+    #score-type { align-self: flex-end; }
 }
 
 .blurred-img {
@@ -328,14 +330,27 @@ button:hover::before {
     line-height: 1;
 }
 
+#rating-col {
+    display: flex;
+}
+
+#rating-title {
+    display: inline;
+    align-self: flex-end;
+    padding-right: 5px;
+}
+
+.star {
+    max-height: 50px;
+    display: inline;
+}
+
 #score-type-col {
     display: flex;
-    justify-content: flex-end;
 }
 
 #score-type {
-    color: var(--jf-blue);
-    align-self: flex-end;
+    font-size: large;
 }
 
 .link {

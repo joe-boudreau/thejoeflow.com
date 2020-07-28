@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <div class="container-fluid">
-    <div class="row justify-content-between">
-        <div class="col">
-            <h3>Rating</h3>
+    <div class="row mb-2 justify-content-between">
+        <div id="rating-col" class="col-12 col-md-6 pt-1">
+            <h3 id="rating-title">Rating</h3>
+            <img th:each="_ : ${#numbers.sequence(1, blogPost.numberOfWholeStars, 1)}" class="star" src="/icons/star.png">
+            <img th:each="_ : ${#numbers.sequence(1, blogPost.numberOfHalfStars, 1)}" class="star" src="/icons/half_star.png">
         </div>
-        <div id="score-type-col" class="col">
-            <h6 id="score-type">Fiction</h6>
+        <div id="score-type-col" class="col-12 col-md-6 pt-1">
+            <h6 id="score-type">Fiction&nbsp;<a tabindex="0" class="clicky fiction-score-info"><img style="height:20px;" src="/icons/info_icon.png"></a>
+            </h6>
         </div>
     </div>
 </div>
 <div class="container-fluid" id="score">
     <div class="row justify-content-center">
-        <div class="col-6 col-m-4">
+        <div class="col-6 col-md-4">
             <div class="row">
                 <div class="col">
                     <h4 class="text-center">Imagery</h4>
@@ -24,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-m-4" style="padding:0;">
+        <div class="col-6 col-md-4" style="padding:0;">
             <div class="row">
                 <div class="col">
                     <h4 class="text-center">Entertainment</h4>
