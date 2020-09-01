@@ -71,12 +71,12 @@ class BlogRESTController(
         }
 
         // Score - if it's a book review
-        var score =
+        val score =
         if (type != PostType.OTHER) {
             if (scoreJSON == null){
                 return ResponseEntity("Book review posts require a Score parameter", HttpStatus.BAD_REQUEST)
             }
-            jacksonObjectMapper().readValue<Score>(scoreJSON)
+            jacksonObjectMapper().readValue(scoreJSON)
         }
         else {
             Score()

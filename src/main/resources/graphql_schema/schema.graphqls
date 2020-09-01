@@ -1,0 +1,58 @@
+scalar Date
+
+type BlogPost {
+    id: ID!
+    title: String!
+    content: String!
+    published: Date!
+    updated: Date!
+    type: PostType!
+    score: Score!
+    background: String
+}
+
+input NewBlogPostInput {
+    id: ID
+    title: String!
+    content: String!
+    type: PostType!
+    score: ScoreInput!
+    background: String
+}
+
+input MutateBlogPostInput {
+    id: ID!
+    title: String
+    content: String
+    type: PostType
+    score: ScoreInput
+    background: String
+}
+
+type Score {
+    scores: [Int]
+    sandwich: String!
+}
+
+input ScoreInput {
+    scores: [Int]
+    sandwich: String!
+}
+
+enum PostType {
+    FICTION_REVIEW
+    NON_FICTION_REVIEW
+    OTHER
+}
+
+
+type Query {
+    blogPost(id: ID!): BlogPost
+    blogPosts(limit: Int = 10, offset: Int = 0): [BlogPost!]!
+}
+
+type Mutation {
+    saveBlogPost(blogPost: NewBlogPostInput!): BlogPost!
+    updateBlogPost(blogPost: MutateBlogPostInput!): BlogPost!
+    deleteBlogPost(id: ID!): Boolean
+}

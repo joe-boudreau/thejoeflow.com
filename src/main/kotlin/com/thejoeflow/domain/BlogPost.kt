@@ -14,14 +14,14 @@ import kotlin.math.roundToInt
 
 @Document
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
-                    @JsonProperty("title") val title: String = "",
-                    @JsonProperty("content") val content: String = "",
-                    @JsonProperty("published") val published: Date = Date.from(Instant.now()),
+data class BlogPost(@JsonProperty("id") @Id var id: Long = Random().nextLong(),
+                    @JsonProperty("title") var title: String = "",
+                    @JsonProperty("content") var content: String = "",
+                    @JsonProperty("published") var published: Date = Date.from(Instant.now()),
                     @JsonProperty("updated") var updated: Date  = Date.from(Instant.now()),
-                    @JsonProperty("type") val type: PostType = PostType.OTHER,
-                    @JsonProperty("score") val score: Score = Score(),
-                    @JsonProperty("background") val background: String = ""
+                    @JsonProperty("type") var type: PostType = PostType.OTHER,
+                    @JsonProperty("score") var score: Score = Score(),
+                    @JsonProperty("background") var background: String = ""
 ) {
 
     @Transient
@@ -59,10 +59,6 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
         return "$previewText..."
     }
 }
-
-@Document
-data class Score(@JsonProperty("scores") val scores : IntArray = intArrayOf(0, 0, 0),
-            @JsonProperty("sandwich") var sandwich : String = "")
 
 enum class PostType {
     FICTION_REVIEW, NON_FICTION_REVIEW,  OTHER

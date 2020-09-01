@@ -74,7 +74,10 @@ class BlogService(
         }
 
         fun getBlogPosts(amount: Int, offset: Int): Array<BlogPost> {
-                val available = (blogPostsOrdered.size - offset).coerceAtMost(amount)
+                var available = blogPostsOrdered.size - offset
+                if (amount > 0){
+                        available = available.coerceAtMost(amount)
+                }
                 return Array(available) { i -> blogPostsOrdered[i + offset]}
         }
 

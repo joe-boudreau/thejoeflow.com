@@ -44,18 +44,24 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-web'
 	compile 'org.springframework.boot:spring-boot-starter-security'
 	compile 'org.springframework.boot:spring-boot-starter-actuator'
-	compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-	compile 'org.jetbrains.kotlin:kotlin-reflect'
-	compile 'org.springframework:spring-webmvc'
-	compile 'org.thymeleaf:thymeleaf:3.0.9.RELEASE'
 	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	compile 'org.springframework.boot:spring-boot-devtools'
+
+	compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+	compile 'org.jetbrains.kotlin:kotlin-reflect'
+
+	compile 'org.springframework:spring-webmvc'
+	compile 'org.springframework.data:spring-data-mongodb'
+
+	compile 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
+	compile 'com.graphql-java:graphql-java-tools:5.2.4'
+
+	compile 'org.thymeleaf:thymeleaf:3.0.9.RELEASE'
 	compile 'com.google.apis:google-api-services-blogger:v3-rev56-1.23.0'
 	compile 'com.google.api-client:google-api-client-java6:1.23.0'
 	compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
 	compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+"
 	compile 'org.jsoup:jsoup:1.11.3'
-	compile 'org.springframework.data:spring-data-mongodb'
 	compile 'com.atlassian.commonmark:commonmark:0.11.0'
 	compile 'com.flickr4java:flickr4java:2.18'
 	compile 'com.rometools:rome:1.12.2'
