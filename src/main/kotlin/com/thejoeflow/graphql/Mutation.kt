@@ -1,10 +1,10 @@
 package com.thejoeflow.graphql
 
-import com.coxautodev.graphql.tools.GraphQLMutationResolver
 import com.thejoeflow.domain.BlogPost
 import com.thejoeflow.graphql.types.MutateBlogPostInput
 import com.thejoeflow.graphql.types.NewBlogPostInput
 import com.thejoeflow.service.BlogService
+import graphql.kickstart.tools.GraphQLMutationResolver
 
 class Mutation(private val blogService: BlogService) : GraphQLMutationResolver {
 

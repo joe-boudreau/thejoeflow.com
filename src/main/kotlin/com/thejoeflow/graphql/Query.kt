@@ -1,8 +1,8 @@
 package com.thejoeflow.graphql
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver
 import com.thejoeflow.domain.BlogPost
 import com.thejoeflow.service.BlogService
+import graphql.kickstart.tools.GraphQLQueryResolver
 
 class Query(private val blogService: BlogService) : GraphQLQueryResolver {
 

@@ -48,7 +48,7 @@ enum PostType {
 
 type Query {
     blogPost(id: ID!): BlogPost
-    blogPosts(limit: Int = 10, offset: Int = 0): [BlogPost!]!
+    blogPosts(limit: Int = -1, offset: Int = 0): [BlogPost!]!
 }
 
 type Mutation {

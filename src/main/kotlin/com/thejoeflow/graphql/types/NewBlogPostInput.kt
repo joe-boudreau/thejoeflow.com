@@ -2,7 +2,6 @@ package com.thejoeflow.graphql.types
 
 import com.thejoeflow.domain.PostType
 import com.thejoeflow.domain.Score
-import graphql.schema.GraphQLInputType
 
 data class NewBlogPostInput (
         val id: String?,
@@ -11,6 +10,4 @@ data class NewBlogPostInput (
         val type: PostType,
         val score: Score,
         val background: String?
-): GraphQLInputType {
-    override fun getName() = "NewBlogPostInput"
-}
+)
