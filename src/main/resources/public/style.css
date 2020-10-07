@@ -51,6 +51,7 @@
 @media only screen and (max-device-width: 992px) {
     /*prevent horizontal scrolling on mobile*/
     body, html { overflow-x:hidden; }
+    .post-content { font-size: large; }
     #post-jumbotron-info { margin: 45% 15%; }
 }
 
@@ -89,7 +90,6 @@ div, p, h3, h4, a, li, li.nav-h2 a {
 .post-content, .post-content p, .post-content a, .post-content b, .post-content i, .post-content li {
     font-family: 'Noto Serif', Georgia, serif;
     line-height: 1.8;
-    text-align: justify;
 }
 
 a{
@@ -252,7 +252,6 @@ div#footer {
 .post-content blockquote{
     display: flow-root;
     margin: 3% 7%;
-    text-align: justify;
     background-color: var(--jf-beige);
     padding: 1% 3%;
     font-style: normal;
