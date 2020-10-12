@@ -3,6 +3,7 @@ package com.thejoeflow.domain
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Element
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.Transient
 import org.springframework.data.mongodb.core.mapping.Document
@@ -11,6 +12,8 @@ import java.time.Instant
 import java.util.*
 import kotlin.math.roundToInt
 
+const val defaultCover = "/images/default_cover.png"
+const val defaultBackground = "/images/postBackgroundImg.jpg"
 
 @Document
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -26,16 +29,18 @@ data class BlogPost(@JsonProperty("id") @Id val id: Long = Random().nextLong(),
 
     @Transient
     private val parsedHtml = Jsoup.parse(content)
-    @Transient
-    private val defaultCover = "/images/default_cover.png"
-    @Transient
-    private val defaultBackground = "/images/postBackgroundImg.jpg"
 
     @Transient
-    val firstImage = if (type != PostType.OTHER) {
-        parsedHtml.selectFirst("img")?.attr("src") ?: defaultCover
-    } else{
-        defaultCover
+    val firstImage = getCoverImage()
+
+    private fun getCoverImage(): String {
+        if (type == PostType.OTHER) {
+            return defaultCover
+        }
+        var coverImg: Element? = parsedHtml.selectFirst("img.book-cover")
+        coverImg = coverImg ?: parsedHtml.selectFirst("img")
+
+        return coverImg?.attr("src") ?: defaultCover
     }
 
     @Transient
