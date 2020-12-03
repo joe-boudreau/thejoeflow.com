@@ -59,7 +59,7 @@ class SyndicationService(@Value("\${server.port}") private val serverPortHttps: 
 
         val entries = mutableListOf<SyndEntry>()
 
-        for (blogPost in blogService.blogPostsOrdered){
+        for (blogPost in blogService.getAllBlogPosts()){
 
             val entry = if (type == FeedType.RSS) {
                 CustomSyndEntry(blogPost.published)

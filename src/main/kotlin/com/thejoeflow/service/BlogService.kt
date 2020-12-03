@@ -14,36 +14,11 @@ import kotlin.collections.LinkedHashMap
 
 @Service
 class BlogService(
-        private val postRepository: PostRepositoryInterface
+        private val postRepository: PostRepositoryInterface,
 ) {
-
-        var blogPostsOrdered = postRepository.findAllBlogPostsSortedByPublishDateDesc()
-
-        var archiveMap = generateArchive()
-
-        private final fun generateArchive(): Map<String, Map<String, List<BlogPost>>> {
-
-                val archive = LinkedHashMap<String, MutableMap<String, MutableList<BlogPost>>>()
-
-                var ym: Array<String>
-                for(post in blogPostsOrdered){
-                        ym = getYearMonth(post.published)
-                        val year = archive[ym[0]]
-                        if(year != null){
-                                val month = year[ym[1]]
-                                if(month != null){
-                                        month.add(post)
-                                }
-                                else {
-                                        year[ym[1]] = mutableListOf(post)
-                                }
-                        }
-                        else{
-                                archive[ym[0]] = mutableMapOf(Pair(ym[1], mutableListOf(post)))
-                        }
-                }
-                return archive
-        }
+        private var blogPostsOrdered = postRepository.findAllBlogPostsSortedByPublishDateDesc()
+        private var archiveMap = generateArchive()
+        private var titlePostMap = generateTitlePostMap()
 
         fun getArchive(): Map<String, Map<String, List<BlogPost>>> {
                 return archiveMap
@@ -66,11 +41,16 @@ class BlogService(
                 return DateFormatSymbols().months[number-1]
         }
 
+        @Deprecated("Use getPostByTitle instead")
         fun getPostById(id: Long): BlogPost? {
                 return blogPostsOrdered.stream()
                                         .filter { bp -> bp.id == id}
                                         .findFirst()
                                         .orElseThrow { Exception("No blog found!")}
+        }
+
+        fun getPostByTitle(title: String): BlogPost? {
+                return titlePostMap[title]
         }
 
         fun getBlogPosts(amount: Int, offset: Int): Array<BlogPost> {
@@ -84,6 +64,12 @@ class BlogService(
                 return Array(available) { i -> blogPostsOfType[i + offset]}
         }
 
+        fun getAllBlogPosts(): List<BlogPost> {
+                return blogPostsOrdered
+        }
+
+
+
         fun saveBlogPost(blogPost: BlogPost) {
                 blogPost.updated = Date.from(Instant.now())
                 postRepository.save(blogPost)
@@ -95,10 +81,39 @@ class BlogService(
                 reloadBlogCache()
         }
 
+        fun getTotalNumberOfPosts(): Int = blogPostsOrdered.size
+
         private fun reloadBlogCache() {
                 blogPostsOrdered = postRepository.findAllBlogPostsSortedByPublishDateDesc()
                 archiveMap = generateArchive()
+                titlePostMap = generateTitlePostMap()
         }
 
-        fun getTotalNumberOfPosts(): Int = blogPostsOrdered.size
+        private fun generateTitlePostMap(): Map<String, BlogPost> {
+                return blogPostsOrdered.stream().collect(Collectors.toMap(BlogPost::urlTitle) { bp -> bp })
+        }
+
+        private fun generateArchive(): Map<String, Map<String, List<BlogPost>>> {
+
+                val archive = LinkedHashMap<String, MutableMap<String, MutableList<BlogPost>>>()
+
+                var ym: Array<String>
+                for(post in blogPostsOrdered){
+                        ym = getYearMonth(post.published)
+                        val year = archive[ym[0]]
+                        if(year != null){
+                                val month = year[ym[1]]
+                                if(month != null){
+                                        month.add(post)
+                                }
+                                else {
+                                        year[ym[1]] = mutableListOf(post)
+                                }
+                        }
+                        else{
+                                archive[ym[0]] = mutableMapOf(Pair(ym[1], mutableListOf(post)))
+                        }
+                }
+                return archive
+        }
 }

@@ -13,5 +13,5 @@ class ArchiveController(
     fun getArchive() = "archive"
 
     @ModelAttribute("posts")
-    fun getAllPosts() = blogService.blogPostsOrdered
+    fun getAllPosts() = blogService.getAllBlogPosts()
 }

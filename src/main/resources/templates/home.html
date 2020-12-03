@@ -51,7 +51,7 @@
 	<div class="row">
 		<tr th:each="post,iter : ${bookReviews}">
 			<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 my-3">
-				<a th:href="@{'/blog/post?id=' + ${post.id}}">
+				<a th:href="@{'/blog/post/' + ${post.urlTitle}}">
 					<div class="card">
 						<img class="card-img-top" th:src="${post.firstImage}" alt="Blog Post Image">
 						<div class="card-body">

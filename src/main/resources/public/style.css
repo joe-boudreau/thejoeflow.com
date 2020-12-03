@@ -345,6 +345,11 @@ button:hover::before {
     display: inline;
 }
 
+.small-star {
+    max-height: 25px;
+    display: inline;
+}
+
 #score-type-col {
     display: flex;
 }
@@ -366,6 +371,9 @@ button:hover::before {
 .archive {
     list-style: none;
     padding-left: 0px;
+}
+
+.archive-score-box {
 }
 
 #update-date {

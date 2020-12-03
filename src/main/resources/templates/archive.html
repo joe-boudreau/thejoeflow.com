@@ -23,17 +23,33 @@
     <div class="row">
         <div class="col-12">
             <div class="container mx-auto" style="max-width:900px;">
+                <hr>
                 <tr th:each="blogPost : ${posts}">
-                        <div class="row mx-auto clicky archive-post" th:attr="data-link=@{'/blog/post?id=' + ${blogPost.id}}">
-                            <div class="col-9">
+                        <div class="row mx-auto clicky archive-post" th:attr="data-link=@{'/blog/post/' + ${blogPost.urlTitle}}">
+                            <div class="col-4">
                                 <h3 th:text="${blogPost.title}">Post Title</h3>
                                 <p style="font-size: smaller;font-style: italic" th:text="${#dates.format(blogPost.published, 'EEEEEEEEEE, MMMMMMMMMMM d yyyy')}">
                                     Published Date
                                 </p>
-                                <p class="d-none d-md-block" th:text="${blogPost.getFirstNChars(400)}">Quick Summary</p>
+                                <div id="rating-col">
+                                    <img th:each="_ : ${#numbers.sequence(1, blogPost.numberOfWholeStars, 1)}" class="small-star" src="/icons/star.png">
+                                    <img th:each="_ : ${#numbers.sequence(1, blogPost.numberOfHalfStars, 1)}" class="small-star" src="/icons/half_star.png">
+                                </div>
                             </div>
-                            <div class="col-3 py-3 px-0">
+                            <div class="col-5 py-3 px-0">
                                 <img class="mx-auto d-block" style="height:150px;" th:src="${blogPost.firstImage}" alt="Blog Post Image">
+                            </div>
+                            <div class="col-3 archive-score-box" th:if="${blogPost.type == T(com.thejoeflow.domain.PostType).FICTION_REVIEW}">
+                                <h5 style="text-decoration: underline">Fiction Score</h5>
+                                <p><b>Imagery: </b><span th:text="${blogPost.score.scores[0] + '/7'}">4</span></p>
+                                <p><b>Entertainment: </b><span th:text="${blogPost.score.scores[1] + '/7'}">5</span></p>
+                                <p><b>Writing: </b><span th:text="${blogPost.score.scores[2]} + '/7'">6</span></p>
+                            </div>
+                            <div class="col-3 archive-score-box" th:if="${blogPost.type == T(com.thejoeflow.domain.PostType).NON_FICTION_REVIEW}">
+                                <h5 style="text-decoration: underline">Non-Fiction Score</h5>
+                                <p><b>Value: </b><span th:text="${blogPost.score.scores[0] + '/7'}">4</span></p>
+                                <p><b>Interest: </b><span th:text="${blogPost.score.scores[1] + '/7'}">5</span></p>
+                                <p><b>Writing: </b><span th:text="${blogPost.score.scores[2]} + '/7'">6</span></p>
                             </div>
                         </div>
                     <hr>

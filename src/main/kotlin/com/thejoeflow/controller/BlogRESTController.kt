@@ -27,7 +27,7 @@ class BlogRESTController(
 
     @GetMapping("/api/blogpost")
     fun getBlogPosts(@RequestParam(required = false) removeContent: Boolean) : ResponseEntity<List<BlogPost>>{
-        var posts = blogService.blogPostsOrdered
+        var posts = blogService.getAllBlogPosts()
         if (removeContent){
             posts = posts.map { bp -> bp.copy(content = "")}
         }

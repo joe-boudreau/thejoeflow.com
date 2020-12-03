@@ -38,7 +38,7 @@
             <tr th:each="blogPost : ${posts}">
                 <div class="blog-post pb-5 px-3 mb-5">
                     <div class="row">
-                        <a class="link" th:href="@{'/blog/post?id=' + ${blogPost.id}}"><h1 th:text="${blogPost.title}">Post Title</h1></a>
+                        <a class="link" th:href="@{'/blog/post/' + ${blogPost.urlTitle}}"><h1 th:text="${blogPost.title}">Post Title</h1></a>
                     </div>
                     <div class="row justify-content-between">
                         <div class="col-lg-6 col-12 px-0 align-self-center">
@@ -48,7 +48,6 @@
                             <p id="update-date">Last Updated: <span th:text="${#dates.format(blogPost.updated, 'dd-MM-yyyy')}">updated date</span></p>
                         </div>
                     </div>
-                    <div class="row" th:insert="~{social}" th:with="url=@{${rootUrl} + '/blog/post?id=' + ${blogPost.id}}"></div>
                     <div class="row px-2">
                         <div class="post-content" th:utext="${blogPost.content}">post content</div>
                     </div>

@@ -19,8 +19,14 @@ class BlogController(
 ) {
 
     @GetMapping("/blog/post")
-    fun getPost(model: Model, @RequestParam("id") id: Long): String {
+    fun getPostById(model: Model, @RequestParam id: Long): String {
         model.addAttribute("blogPost", blogService.getPostById(id))
+        return "post"
+    }
+
+    @GetMapping("/blog/post/{title}")
+    fun getPostByTitle(model: Model, @PathVariable title: String): String {
+        model.addAttribute("blogPost", blogService.getPostByTitle(title))
         return "post"
     }
 
@@ -31,15 +37,11 @@ class BlogController(
     fun getBlog(@PathVariable("page") page: Int = 0, model: Model): String {
         model.addAttribute("totalPages", totalNumberOfPages())
         model.addAttribute("currentPage", page)
-        model.addAttribute("posts", getThreeBlogPosts(page * 3))
+        model.addAttribute("posts", blogService.getBlogPosts(3, page * 3))
         return "blog"
     }
 
     private fun totalNumberOfPages() = ceil(blogService.getTotalNumberOfPosts() / 3.0).roundToInt() - 1
-
-    fun getThreeBlogPosts(offset: Int): Array<BlogPost> {
-        return blogService.getBlogPosts(3, offset)
-    }
 
     @ModelAttribute("archive")
     fun getArchiveInfo(): Map<String, Map<String, List<BlogPost>>>{

@@ -45,7 +45,7 @@ class EditPostController(
     }
 
     @ModelAttribute("posts")
-    fun getAllPosts() = blogService.blogPostsOrdered
+    fun getAllPosts() = blogService.getAllBlogPosts()
 
     private fun savePhoto(background: MultipartFile, title: String): String {
         val backgroundFilename = title.hashCode().toString()
