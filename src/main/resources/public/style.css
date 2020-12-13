@@ -270,6 +270,10 @@ div#footer {
     font-style: normal;
 }
 
+.post-content footer {
+    font-size: small;
+}
+
 #more, #back {
     color: black;
 }

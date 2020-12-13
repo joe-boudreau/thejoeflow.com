@@ -41,7 +41,6 @@ class BlogService(
                 return DateFormatSymbols().months[number-1]
         }
 
-        @Deprecated("Use getPostByTitle instead")
         fun getPostById(id: Long): BlogPost? {
                 return blogPostsOrdered.stream()
                                         .filter { bp -> bp.id == id}

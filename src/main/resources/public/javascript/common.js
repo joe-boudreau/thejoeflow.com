@@ -9,7 +9,12 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor){
 });
 
 const template = '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-body"></div></div>'
-const popoverOptions = {html:true, placement:"right", trigger:"focus", template: template}
+const popoverOptions = {
+    html:true,
+    placement:"right",
+    trigger:"focus",
+    template: template
+}
 const fictionDesc = "<b>Imagery: </b><p>How well the world within the story is described " +
     "and visualized. Does the writing create vivid and realistic ideas in your " +
     "mind as you read? A high score is given to fiction that creates lasting memories.</p>" +

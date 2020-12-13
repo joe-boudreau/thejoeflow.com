@@ -35,11 +35,12 @@
 <div class="container odd mx-auto" style="max-width:800px;">
     <div class="row">
         <div class="blog-post col-12 px-4">
-            <div class="row px-2">
+            <div class="row px-2 mb-5">
                 <div class="post-content" th:utext="${blogPost.content}">post content</div>
             </div>
-            <div class="row mb-5" th:insert="${blogPost.type == T(com.thejoeflow.domain.PostType).FICTION_REVIEW} ? ~{fictionScore} : ~{}"></div>
-            <div class="row mb-5" th:insert="${blogPost.type == T(com.thejoeflow.domain.PostType).NON_FICTION_REVIEW} ? ~{nonFictionScore} : ~{}"></div>
+            <hr>
+            <div class="row mb-3" th:insert="${blogPost.type == T(com.thejoeflow.domain.PostType).FICTION_REVIEW} ? ~{fictionScore} : ~{}"></div>
+            <div class="row mb-3" th:insert="${blogPost.type == T(com.thejoeflow.domain.PostType).NON_FICTION_REVIEW} ? ~{nonFictionScore} : ~{}"></div>
             <hr>
             <div id="disqus_thread" th:attr="data-url=@{${rootUrl} + '/blog/post?id=' + ${blogPost.id}}, data-page-id=${blogPost.id}"></div>
             <script>
